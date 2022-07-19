@@ -5,10 +5,12 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "ethers": "^5.4.7",
+    "mdb-react-ui-kit": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/react": "^18.0.15",
     "react-scripts": "5.0.1"
   },
   "scripts": {

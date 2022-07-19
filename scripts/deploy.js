@@ -23,7 +23,7 @@ async function main() {
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
   const SBT = await ethers.getContractFactory("SBT");
-  const sbt = await SBT.deploy("SBT", "SBT test");
+  const sbt = await SBT.deploy("SBT Test Token", "SBT");
   await sbt.deployed();
 
   console.log("SBT Contract address:", sbt.address);
