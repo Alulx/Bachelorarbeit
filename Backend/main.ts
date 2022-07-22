@@ -29,7 +29,6 @@ async function main(): Promise<void> {
   console.log(await sbt.methods.operator.call().call());
 
 
-
   console.log(await sbt.methods.mint('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', {
     identity: 'Alex', url: 'hochschule-mittweida.de', score: 100, timestamp: 1143 }
   ).send({ from: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', value: web3.utils.toWei('0.001', 'ether')}));
