@@ -20,15 +20,19 @@ async function main(): Promise<void> {
   console.log('Starting DeRep...');
   initializeContract();
 
-  createNetwork();
+  await setProfile('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', {
+    identity: 'keke Stallman', url: 'gnu.org', score: Math.floor(Math.random() * 100), timestamp: Date.now() });
+  console.log(await hasProfile('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' ));
 
+  console.log(await listProfiles('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'));
+  // createNetwork();
   //  User 2
   //  console.log(await hasSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8'));
 
   const soul1: Soul = {
     identity: 'TESTEST', url: 'hochschule-mittweida.de', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
 
- /*  console.log(await hasSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'));
+  /*  console.log(await hasSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'));
   await updateSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', soul1);
   // console.log(await hasSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'));
   console.log(await getSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266')); */
@@ -118,5 +122,49 @@ async function createNetwork(): Promise<void> {
     console.log(await getSoul(accounts[index]));
     index++;
   }
+}
+/**
+ *  Simulates an established network of Souls with dedicated SBTs to create personalities
+ *
+ * @param address - The wallet addres of the soul
+ * @param soulData
+ */
+async function setProfile(address: string, soulData: Soul): Promise<void> {
+  await sbt.methods.setProfile(address, soulData).send({ from: address, gasPrice: '20000000000' });
 
+}
+
+/**
+ *
+ * @param profileAddress
+ * @param soulAddress  -The wallet addres of the soul
+ */
+async function getProfile(profileAddress: string, soulAddress: string): Promise<void> {
+  await sbt.methods.getProfile(profileAddress, soulAddress).call();
+}
+
+/**
+ *
+ * @param address - The wallet addres of the soul
+ */
+async function listProfiles(address: string): Promise<void> {
+  await sbt.methods.listProfiles(address).call();
+}
+
+/**
+ *
+ * @param profileAddress
+ * @param soulAddress - The wallet addres of the soul
+ */
+async function hasProfile(profileAddress: string, soulAddress: string): Promise<void> {
+  await sbt.methods.hasProfile(profileAddress, soulAddress).call();
+}
+
+/**
+ *
+ * @param profileAddress
+ * @param soulAddress
+ */
+async function removeProfile(profileAddress: string, soulAddress: string): Promise<void> {
+  await sbt.methods.removeProfile(profileAddress, soulAddress).send({ from: soulAddress, gasPrice: '20000000000' });
 }

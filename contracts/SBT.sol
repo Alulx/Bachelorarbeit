@@ -42,7 +42,7 @@ contract SBT {
 
     function mint(address _soul, Soul memory _soulData) external {
         require(keccak256(bytes(souls[_soul].identity)) == zeroHash, "Soul already exists");
-        require(msg.sender == operator, "Only operator can mint new souls");
+        //require(msg.sender == operator, "Only operator can mint new souls");
         souls[_soul] = _soulData;
         emit Mint(_soul);
     }
@@ -58,7 +58,7 @@ contract SBT {
     }
 
     function update(address _soul, Soul memory _soulData) external {
-        require(msg.sender == operator, "Only operator can update soul data");
+        require(msg.sender == _soul, "Only users can update soul data");
         souls[_soul] = _soulData;
         emit Update(_soul);
     }
