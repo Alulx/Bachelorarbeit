@@ -17,7 +17,20 @@ contract SBT {
         string url;
         uint256 score;
         uint256 timestamp;
+
     }
+
+    struct Sbt {
+        uint tokenId;
+        address attester;
+        bool reputation; 
+        string explanation_url;
+
+    }
+
+    Sbt[] public sbts;
+
+    mapping (address => uint) soulSbtCount;
 
     mapping (address => Soul) private souls;
     mapping (address => mapping (address => Soul)) soulProfiles;
@@ -28,16 +41,46 @@ contract SBT {
     address public operator;
     bytes32 private zeroHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
     
+    event Attest(address _soul);
     event Mint(address _soul);
     event Burn(address _soul);
     event Update(address _soul);
     event SetProfile(address _profiler, address _soul);
     event RemoveProfile(address _profiler, address _soul);
 
+    uint tokenId = 1; 
+
     constructor(string memory _name, string memory _ticker) {
       name = _name;
       ticker = _ticker;
       operator = msg.sender;
+    }
+
+    function attest(address _targetSoul, bool _reputation, string memory _explanation_url) external {
+        //Target soul has to exist
+        require(keccak256(bytes(souls[_targetSoul].identity)) != zeroHash, "Cannot send SBT to Soul that has not been minted");
+        require(keccak256(bytes(souls[msg.sender].identity)) != zeroHash, "Attester has to have a Soul themselves");
+    	sbts.push(Sbt(tokenId, msg.sender, _reputation, _explanation_url));
+        tokenId++; 
+        soulSbtCount[_targetSoul]++;
+        emit Attest(_targetSoul);
+    }
+
+    function revoke(address _soul, Sbt memory _sbt) external {
+      
+    }
+
+    function getSbtsBySoul(address _soul) external view returns (Sbt[] memory) {
+        Sbt[] memory result = new Sbt[](soulSbtCount[_soul]);
+        uint counter = 0;
+      
+        for (uint i = 0; i < sbts.length; i++) {
+            if (sbts[i].attester == _soul) {
+                result[counter] = sbts[i];
+                counter++;
+            }
+        }
+        return result; 
     }
 
     function mint(address _soul, Soul memory _soulData) external {
@@ -108,4 +151,7 @@ contract SBT {
         delete soulProfiles[_profiler][msg.sender];
         emit RemoveProfile(_profiler, _soul);
     }
+
+
+    
 }

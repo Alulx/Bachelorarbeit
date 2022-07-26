@@ -33,7 +33,9 @@ describe('SBT', function () {
     expect(soul[0]).to.equal('James Bachini');
   });
 
-  it('Operator should be able to update soul', async function () {
+  it('Soulowner should be able to update soul', async function () {
+    console.log(user1.address);
+
     const soul = ['James Bachini', 'https://jamesbachini.com', 80, new Date().getTime()];
     await sbt.update(user1.address,soul);
   });

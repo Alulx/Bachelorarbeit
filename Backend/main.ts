@@ -4,11 +4,18 @@ import { Soul } from 'soul';
 import Web3 from 'web3';
 import { AbiItem } from 'web3-utils';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-import SBT_ABI from './SBT.json';
+import SBT_ABI from '../artifacts/contracts/SBT.sol/SBT.json';
+import { Sbt } from 'sbt';
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
+const user2 = '0x70997970C51812dc3A010C7d01b50e0d17dc79C8';
+const user1 = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
 
-
+const soul1: Soul = {
+  identity: 'TESTEST', url: 'hochschule-mittweida.de', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
+  const soul2: Soul = {
+    identity: 'Jezz Befos', url: 'amzon-mittweida.de', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
+  
 let web3;
 let sbt;
 
@@ -19,18 +26,29 @@ main();
 async function main(): Promise<void> {
   console.log('Starting DeRep...');
   initializeContract();
+  // await createNetwork();
+  await mintSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', soul2);
+  console.log(await sbt.methods.sbts(3).call());
+  await mintSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', soul1);
+  //await sbt.methods.attest('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'good friend').send({ from: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', gasPrice: '20000000000' });
 
-  await setProfile('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', {
-    identity: 'keke Stallman', url: 'gnu.org', score: Math.floor(Math.random() * 100), timestamp: Date.now() });
-  console.log(await hasProfile('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266' ));
+  //console.log(await sbt.methods.getSbtsBySoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8').call());
+  //console.log(await sbt.methods.getSbtsBySoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266').call());
 
-  console.log(await listProfiles('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'));
-  // createNetwork();
+
+  await burnSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8');
+  await burnSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266');// IF YOU BURN OYU HAVE TO REMOV SBT S
+
+  /* await updateSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', {
+    identity: 'PJEFF JEEZUS', url: 'Micr0s0ft.sss', score: 0, timestamp: Date.now() });
+
+  console.log(await getSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8'));
+    */
+
+
   //  User 2
   //  console.log(await hasSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8'));
 
-  const soul1: Soul = {
-    identity: 'TESTEST', url: 'hochschule-mittweida.de', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
 
   /*  console.log(await hasSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266'));
   await updateSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', soul1);
@@ -167,4 +185,25 @@ async function hasProfile(profileAddress: string, soulAddress: string): Promise<
  */
 async function removeProfile(profileAddress: string, soulAddress: string): Promise<void> {
   await sbt.methods.removeProfile(profileAddress, soulAddress).send({ from: soulAddress, gasPrice: '20000000000' });
+}
+
+/**
+ *  Attests an SBT to the targeted Soul  
+ *
+ * @param attester
+ * @param Stoken
+ */
+async function attestSbt( attester: string, Stoken: Sbt): Promise<void> {
+  await sbt.methods.attest(Stoken.attester, Stoken.reputation, Stoken.explanation_url).send({ from: attester, gasPrice: '20000000000' });
+
+}
+
+/**
+ *
+ *
+ * @param soulAddress - The wallet addres of the targeted Soul
+ */
+async function getSbtBySoul(soulAddress: string): Promise<void> {
+  return (await sbt.methods.getSbtsBySoul(soulAddress).call());
+
 }
