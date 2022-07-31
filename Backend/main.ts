@@ -28,12 +28,12 @@ async function main(): Promise<void> {
   initializeContract();
   // await createNetwork();
   await mintSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', soul2);
-  console.log(await sbt.methods.sbts(3).call());
   await mintSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', soul1);
-  //await sbt.methods.attest('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'good friend').send({ from: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', gasPrice: '20000000000' });
+  await sbt.methods.attest('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'good friend').send({ from: '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', gasPrice: '20000000000' });
 
-  //console.log(await sbt.methods.getSbtsBySoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8').call());
-  //console.log(await sbt.methods.getSbtsBySoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266').call());
+  console.log(await sbt.methods.getSbtsBySoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8').call());
+  console.log(await sbt.methods.getSbtsBySoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266').call());
+  console.log(await sbt.methods.sbts(0).call());
 
 
   await burnSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8');

@@ -1,5 +1,5 @@
 export interface Sbt {
-    tokenId: number; 
+    tokenId: number;
     attester: string;
     reputation: boolean;
     explanation_url: string;
