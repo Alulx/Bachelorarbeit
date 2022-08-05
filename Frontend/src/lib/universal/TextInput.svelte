@@ -1,0 +1,1 @@
+<input type="text" placeholder="Search for Soul..." class="input input-bordered w-full max-w-xs bg-primaryy" />
