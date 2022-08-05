@@ -3,5 +3,4 @@ export interface Sbt {
     attester: string;
     reputation: boolean;
     explanation_url: string;
-    active: boolean;
 }
