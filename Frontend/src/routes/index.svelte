@@ -7,6 +7,7 @@
 
     async function connect(){
          await defaultEvmStores.setProvider() //maybe with localhost?
+         localStorage.setItem('isWalletConnected', "true");
          let address =  await $web3.eth.getAccounts();
          user.set(address[0]);
          

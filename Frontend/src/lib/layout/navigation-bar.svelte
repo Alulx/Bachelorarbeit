@@ -4,6 +4,7 @@ import { user } from "$lib/stores";
 
 import ButtonPrimary from "$lib/universal/button-primary.svelte";
 import TextInput from "$lib/universal/TextInput.svelte";
+import { onMount } from "svelte";
 import { web3,connected, defaultEvmStores } from "svelte-web3";
 
 
@@ -15,8 +16,25 @@ function changePage(event: { detail: { search: string; }; }) {
 function disconnect(){
     defaultEvmStores.disconnect()
     user.set("No Account Connected")
+    localStorage.setItem('isWalletConnected', "false");
+
 }
 
+onMount(async () => {
+    console.log("ola")
+		if (localStorage?.getItem('isWalletConnected') === 'true'){
+            try{
+                await defaultEvmStores.setProvider();
+                let address = await $web3.eth.getAccounts();
+                user.set(address[0]);
+
+                localStorage.setItem('isWalletConnected', "true");
+            } catch (ex){
+                console.log(ex);
+            }
+        }
+	});
+     
 let address: string;
 
 user.subscribe(value => {
