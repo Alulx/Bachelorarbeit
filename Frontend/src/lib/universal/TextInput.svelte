@@ -18,13 +18,6 @@ import { createEventDispatcher } from "svelte";
         } 
     }
 
-    function sayHello() {
-        console.log('sayHello in child: ', 'Hello!');
-		dispatch('message', {
-			text: 'Hello!'
-		});
-	}
-
 </script>
 
 <input on:keyup={manageEnter} bind:value={input} type="text" placeholder="Search for Soul..." class="input input-bordered w-full max-w-xs bg-primaryy" />

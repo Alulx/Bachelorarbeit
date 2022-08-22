@@ -22,7 +22,7 @@ const config = {
     paths: {
       base: process.env.NODE_ENV === 'development' ?
         '' :
-        '/digitalx-mint-drops/digitalx-mint-factory',
+        '/Bachelorarbeit/Frontend',
     },
   },
 };

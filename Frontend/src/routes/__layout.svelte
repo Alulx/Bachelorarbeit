@@ -9,8 +9,8 @@ import TextInput from '$lib/universal/TextInput.svelte';
                 window.location.href = route;
         };
     }
-   
+
 </script>
 
 <NavigationBar> </NavigationBar>
-<!-- <slot /> -->
+<slot />
