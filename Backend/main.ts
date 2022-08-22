@@ -24,7 +24,8 @@ main();
 async function main(): Promise<void> {
   console.log('Starting DeRep...');
   initializeContract();
-  // await createNetwork();/* 
+  await createNetwork();
+  /*
   await mintSoul('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', soul2);
   await mintSoul('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', soul1);
   await attestSBT('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', true, 'test SBT');
