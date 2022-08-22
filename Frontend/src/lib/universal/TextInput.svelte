@@ -19,5 +19,6 @@ import { createEventDispatcher } from "svelte";
     }
 
 </script>
-
-<input on:keyup={manageEnter} bind:value={input} type="text" placeholder="Search for Soul..." class="input input-bordered w-full max-w-xs bg-primaryy" />
+<div class= "w-full ">
+    <input on:keyup={manageEnter} bind:value={input} type="text" placeholder="Search for Soul..." class="input input-bordered w-full max-w-xs " />
+</div>
