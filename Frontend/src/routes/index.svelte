@@ -8,7 +8,7 @@
         <ButtonPrimary>
             Find your Soul here
         </ButtonPrimary>
-       
+        <a href="/about">About my site</a>
         <div>
             <img src="/img/tap.png" alt="Tap here" class="w-10 h-10 relative -right-3/4 -top-3">
         </div>

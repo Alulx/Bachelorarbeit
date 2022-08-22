@@ -9,5 +9,4 @@ import TextInput from "$lib/universal/TextInput.svelte";
     <div  style="margin-left: auto;  margin-right: 0;">
         <TextInput> </TextInput>
     </div>
-    
 </div>
