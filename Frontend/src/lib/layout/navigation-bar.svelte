@@ -13,13 +13,18 @@ function changePage(event: { detail: { search: string; }; }) {
     window.location.href = "/souls/"+route
 }
 
+/**
+ * Disconnect all connections form metamask
+ */
 function disconnect(){
     defaultEvmStores.disconnect()
     user.set("No Account Connected")
     localStorage.setItem('isWalletConnected', "false");
 
 }
-
+/**
+ *  Check if User is still connected after page reload
+*/
 onMount(async () => {
     console.log("ola")
 		if (localStorage?.getItem('isWalletConnected') === 'true'){
@@ -34,7 +39,7 @@ onMount(async () => {
             }
         }
 	});
-     
+
 let address: string;
 
 user.subscribe(value => {
