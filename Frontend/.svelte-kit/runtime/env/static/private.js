@@ -20,9 +20,6 @@ export const SHLVL = "1";
 /** @type {import('$env/static/private').npm_config_noproxy} */
 export const npm_config_noproxy = "";
 
-/** @type {import('$env/static/private').MOTD_SHOWN} */
-export const MOTD_SHOWN = "update-motd";
-
 /** @type {import('$env/static/private').HOME} */
 export const HOME = "/home/alhu";
 
@@ -33,7 +30,7 @@ export const OLDPWD = "/home/alhu/Bachelorarbeit";
 export const TERM_PROGRAM_VERSION = "1.70.2";
 
 /** @type {import('$env/static/private').VSCODE_IPC_HOOK_CLI} */
-export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-d8e85f13-a4ab-4694-a33c-b718b22dba34.sock";
+export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-c1b614c2-f871-487e-a4f5-7207c2e0384e.sock";
 
 /** @type {import('$env/static/private').npm_package_json} */
 export const npm_package_json = "/home/alhu/Bachelorarbeit/Frontend/package.json";
@@ -75,7 +72,7 @@ export const LOGNAME = "alhu";
 export const NAME = "w4deumsy9003565";
 
 /** @type {import('$env/static/private').WSL_INTEROP} */
-export const WSL_INTEROP = "/run/WSL/12_interop";
+export const WSL_INTEROP = "/run/WSL/14_interop";
 
 /** @type {import('$env/static/private')._} */
 export const _ = "/usr/bin/npm";
