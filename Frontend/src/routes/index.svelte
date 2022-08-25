@@ -5,12 +5,6 @@
 
 	import { user } from '$lib/stores';
 
-    async function connect(){
-         await defaultEvmStores.setProvider() //maybe with localhost?
-         localStorage.setItem('isWalletConnected', "true");
-         let address =  await $web3.eth.getAccounts()
-         user.set(address[0]);
-    }
 
 </script>
 
@@ -18,8 +12,8 @@
 
 <div style="background-image: url(/img/index-bg.png);" class="w-full h-full bg-cover fixed flex">
     <div class="relative top-28 left-28">
-        <ButtonPrimary on:click={connect}>
-             <a href ='/souls' >  Find your Soul now </a> 
+        <ButtonPrimary>
+             <a href ='/mint' >  Find your Soul now </a> 
         </ButtonPrimary>
         {#if !$connected}
 

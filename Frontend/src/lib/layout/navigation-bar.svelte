@@ -16,12 +16,19 @@ function changePage(event: { detail: { search: string; }; }) {
 /**
  * Disconnect all connections form metamask
  */
-function disconnect(){
-    defaultEvmStores.disconnect()
+async function disconnect(){
+    await defaultEvmStores.disconnect()
     user.set("No Account Connected")
     localStorage.setItem('isWalletConnected', "false");
-
 }
+
+async function connect(){
+         await defaultEvmStores.setProvider() //maybe with localhost?
+         localStorage.setItem('isWalletConnected', "true");
+         let address =  await $web3.eth.getAccounts()
+         user.set(address[0]);
+    }
+
 /**
  *  Check if User is still connected after page reload
 */
@@ -59,7 +66,7 @@ user.subscribe(value => {
         {#if $connected}
         <button  on:click={disconnect} class="btn btn-ghost">Disconnect </button>
         {:else}
-        <button  on:click={disconnect} class="btn btn-ghost cursor-not-allowed">Disconnect </button>
+        <button  on:click={connect} class="btn btn-ghost">Connect </button>
         {/if}
         
         <TextInput on:searchEntered={changePage}> </TextInput>
