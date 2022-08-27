@@ -1,24 +1,28 @@
 <script lang=ts>
-import { createEventDispatcher } from "svelte";
 
+    import { createEventDispatcher } from "svelte";
+    import { writable } from "svelte/store";
+    import {browser} from "$app/env"
 
+    export const soulSearched = writable(
+        browser && (localStorage.getItem('soulSearched') || ''));
+    soulSearched.subscribe((val) => browser && localStorage.setItem("soulSearched", val));
 
     const dispatch = createEventDispatcher();
 
-    let input: string;
-  
+    
     function manageEnter(event: any){
         event.preventDefault();
         if (event.keyCode === 13) {
             dispatch('searchEntered', {
-                search: input
+                search: $soulSearched
             });
-            console.log(input);
+            console.log($soulSearched);
 
         } 
     }
 
 </script>
 <div class= "w-full ">
-    <input on:keyup={manageEnter} bind:value={input} type="text" placeholder="Search for Soul..." class="input input-bordered w-full max-w-xs " />
+    <input on:keyup={manageEnter} bind:value={$soulSearched} type="text" placeholder="Search for Soul..." class="input input-bordered w-full max-w-xs " />
 </div>

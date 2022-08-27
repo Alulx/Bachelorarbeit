@@ -1,14 +1,15 @@
 <script lang=ts>
-import { user } from "$lib/stores";
+import {  user } from "$lib/stores";
 
 
 import ButtonPrimary from "$lib/universal/button-primary.svelte";
 import TextInput from "$lib/universal/TextInput.svelte";
 import { onMount } from "svelte";
 import { web3,connected, defaultEvmStores } from "svelte-web3";
+import { writable } from "svelte/store";
 
 
-function changePage(event: { detail: { search: string; }; }) {
+function changePage(event: { detail: { search: string; } }) {
     let route = event.detail.search;
     window.location.href = "/souls/"+route
 }
@@ -33,7 +34,7 @@ async function connect(){
  *  Check if User is still connected after page reload
 */
 onMount(async () => {
-    console.log("ola")
+    console.log("ola new page")
 		if (localStorage?.getItem('isWalletConnected') === 'true'){
             try{
                 await defaultEvmStores.setProvider();
