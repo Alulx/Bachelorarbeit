@@ -11,7 +11,6 @@ declare module '$env/static/private' {
 	export const npm_node_execpath: string;
 	export const SHLVL: string;
 	export const npm_config_noproxy: string;
-	export const MOTD_SHOWN: string;
 	export const HOME: string;
 	export const OLDPWD: string;
 	export const TERM_PROGRAM_VERSION: string;

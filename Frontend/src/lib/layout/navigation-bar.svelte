@@ -7,13 +7,16 @@ import TextInput from "$lib/universal/TextInput.svelte";
 import { onMount } from "svelte";
 import { web3,connected, defaultEvmStores } from "svelte-web3";
 import { writable } from "svelte/store";
-
+import SBT_ABI from "../../contracts/SBT.json";
+import contractAddress from "../../contracts/contract-address.json";
+import type { AbiItem } from "web3-utils/types";
 
 function changePage(event: { detail: { search: string; } }) {
     let route = event.detail.search;
     window.location.href = "/souls/"+route
 }
-
+/* defaultEvmStores.attachContract('sbtcontract',contractAddress.SBT, SBT_ABI.abi as AbiItem[])
+ */
 /**
  * Disconnect all connections form metamask
  */
@@ -24,10 +27,11 @@ async function disconnect(){
 }
 
 async function connect(){
-         await defaultEvmStores.setProvider() //maybe with localhost?
+         await defaultEvmStores.setProvider() 
          localStorage.setItem('isWalletConnected', "true");
          let address =  await $web3.eth.getAccounts()
          user.set(address[0]);
+
     }
 
 /**

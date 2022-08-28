@@ -20,9 +20,6 @@ export const SHLVL = "1";
 /** @type {import('$env/static/private').npm_config_noproxy} */
 export const npm_config_noproxy = "";
 
-/** @type {import('$env/static/private').MOTD_SHOWN} */
-export const MOTD_SHOWN = "update-motd";
-
 /** @type {import('$env/static/private').HOME} */
 export const HOME = "/home/alex";
 
@@ -36,7 +33,7 @@ export const TERM_PROGRAM_VERSION = "1.70.2";
 export const NVM_BIN = "/home/alex/.nvm/versions/node/v16.9.1/bin";
 
 /** @type {import('$env/static/private').VSCODE_IPC_HOOK_CLI} */
-export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-b63f74ed-0e42-4492-9745-782c571325ca.sock";
+export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-6ba89253-3dd8-4b7e-b2d9-b47cfa321f2e.sock";
 
 /** @type {import('$env/static/private').npm_package_json} */
 export const npm_package_json = "/home/alex/Bachelorarbeit/Frontend/package.json";
@@ -75,7 +72,7 @@ export const LOGNAME = "alex";
 export const NAME = "DESKTOP-NBN8EKQ";
 
 /** @type {import('$env/static/private').WSL_INTEROP} */
-export const WSL_INTEROP = "/run/WSL/13_interop";
+export const WSL_INTEROP = "/run/WSL/24729_interop";
 
 /** @type {import('$env/static/private')._} */
 export const _ = "/home/alex/.nvm/versions/node/v16.9.1/bin/npm";
