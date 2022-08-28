@@ -15,8 +15,8 @@ const soul1: Soul = {
 const soul2: Soul = {
   identity: 'Jezz Befos', url: 'amzon-mittweida.de', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
 
-let web3;
-let sbt;
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+const sbt =  new web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress); //  ?????
 
 main();
 /**
@@ -69,8 +69,7 @@ async function main(): Promise<void> {
  *  The function to initalize Web3 provider and the sbt contract
  */
 function initializeContract(): void {
-  web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-  sbt =  new web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress); //  ?????
+
   if ( web3.eth.net.isListening()) {
     console.log('We are live! ');
   } else {
@@ -112,7 +111,7 @@ async function burnSoul(address: string): Promise<void> {
  *
  * @param address - The wallet addres of the soul
  */
-async function hasSoul(address: string): Promise<boolean> {
+export async function hasSoul(address: string, sbt): Promise<boolean> {
   return !!(await sbt.methods.hasSoul(address).call());
 
 }

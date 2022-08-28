@@ -5,7 +5,7 @@ import {  user } from "$lib/stores";
 import ButtonPrimary from "$lib/universal/button-primary.svelte";
 import TextInput from "$lib/universal/TextInput.svelte";
 import { onMount } from "svelte";
-import { web3,connected, defaultEvmStores } from "svelte-web3";
+import { web3,connected, defaultEvmStores, selectedAccount } from "svelte-web3";
 import { writable } from "svelte/store";
 import SBT_ABI from "../../contracts/SBT.json";
 import contractAddress from "../../contracts/contract-address.json";
@@ -38,9 +38,9 @@ async function connect(){
  *  Check if User is still connected after page reload
 */
 onMount(async () => {
-    console.log("ola new page")
 		if (localStorage?.getItem('isWalletConnected') === 'true'){
             try{
+                console.log("Reconnecting...")
                 await defaultEvmStores.setProvider();
                 let address = await $web3.eth.getAccounts();
                 user.set(address[0]);
@@ -64,8 +64,8 @@ user.subscribe(value => {
     <p class="btn btn-ghost normal-case text-xl"><a href ='/' >Decentralized Reputation</a></p>
     
     <a href="/about">About</a>
-    
-    <p class="ml-auto">{address}</p>
+    <!-- use this instead of user store here-->
+    <p class="ml-auto">{$selectedAccount}</p>
 
     <div class="ml-auto mr-0">
         {#if $connected}

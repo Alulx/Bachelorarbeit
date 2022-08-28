@@ -1,5 +1,13 @@
 import type { Sbt } from '../../../Backend/sbt';
 import type { Soul } from '../../../Backend/soul';
+import { defaultEvmStores as evm, connected, chainId, chainData,  web3,  contracts, selectedAccount } from 'svelte-web3';
+
+/* import SBT_ABI from "../contracts/SBT.json";
+import contractAddress from "../contracts/contract-address.json";
+
+evm.attachContract('sbtcontract', contractAddress.SBT, SBT_ABI.abi as AbiItem[]);
+ */
+
 /**
  *  Mints a new Soul of the specified user
  *

@@ -39,8 +39,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"ethers": "^5.7.0",
-		"svelte-ethers-store": "^2.4.0",
-		"svelte-web3": "^3.6.0"
+		"svelte-web3": "^4.0.0-2"
 	}
 }

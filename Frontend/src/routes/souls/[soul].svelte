@@ -4,7 +4,7 @@
 import { onMount } from "svelte";
 import {  user } from "$lib/stores";
 import {browser} from "$app/env";
-import { defaultEvmStores as evm, connected, chainId, chainData,  web3 } from 'svelte-web3'
+import { defaultEvmStores as evm, connected, chainId, chainData,  web3, contracts , selectedAccount } from 'svelte-web3'
 import type { AbiItem } from "web3-utils";
 import SBT_ABI from "../../contracts/SBT.json";
 import contractAddress from "../../contracts/contract-address.json";
@@ -12,25 +12,47 @@ import type Contract from "web3/eth/contract";
 import type {Sbt} from "../../../../Backend/sbt"
 import type {Soul} from "../../../../Backend/soul"
 import { attestSBT, getSbtsBySoul, getSoul, hasSoul } from "$lib/sbtfunctions";
-//evm.attachContract('sbtcontract',contractAddress, SBT_ABI.abi as AbiItem[])
-
+evm.attachContract('sbtcontract',contractAddress.SBT, SBT_ABI.abi as AbiItem[])
+ 
 let sbtcontract: any;
 let reputation: boolean;
 let description = '';
 
-let soulExists: boolean;
+let soulExists;
 let soul: string;
 let SoulObject: Soul;  
+let sbts: Sbt[];
+
+    selectedAccount.subscribe(async $selectedAccount => {
+        if (!$selectedAccount) return;
+
+        console.log('connected to account ', $selectedAccount)
+    })
+
+   
+    connected.subscribe(async value => {
+        if (!value) return
+        soulExists = await $contracts.sbtcontract.methods.hasSoul(soul).call();
+        console.log('target has Soul:', soulExists);
+    }) 
+   
+
+    contracts.subscribe(async $contracts => {
+        if (!$contracts.sbtcontract) return;
+        SoulObject = await $contracts.sbtcontract.methods.getSoul(soul).call();
+        console.log('Soul is', SoulObject);
+        showSbts();
+    }) 
 
     onMount(async () => {
-        console.log("here is a soul")
+      
         soul = localStorage.getItem('soulSearched');
+        console.log("here is the searched soul: ", soul);
+        
     });
     
     async function showSbts(){
-        sbtcontract =  new $web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress.SBT)
-
-        console.log(await getSbtsBySoul(soul, sbtcontract));
+        console.log("Souls sbts are:",await getSbtsBySoul(soul, $contracts.sbtcontract));
     }
 
     async function AttestSBTFront(){
@@ -40,6 +62,7 @@ let SoulObject: Soul;
       }
       sbtcontract =  new $web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress.SBT)
        await attestSBT(soul,$user ,reputation, description, sbtcontract);
+       
     }
 
     
@@ -54,18 +77,16 @@ let SoulObject: Soul;
 
     async function hasSoulFront(){
         sbtcontract =  new $web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress.SBT)
-        soulExists = await hasSoul(soul, sbtcontract);
+        console.log (await hasSoul(soul,sbtcontract));
     }
 
 
 </script>
-<!-- {#await $contracts.sbtcontract.methods.hasSoul(soul).call() then value}
-{value}
-{/await}  -->
-{#if !true}
+
+<!-- {#if !soulExists}
 <PageNotFound></PageNotFound>
 
-{:else}
+{:else} -->
 <div style="background-image: url(/img/purple.jpg);" class="w-full h-full bg-cover fixed flex gap-3 p-5">
   
     <div id="AffiliatedSouls" class="border relative flex-col w-1/4 h-5/6  " >
@@ -76,12 +97,16 @@ let SoulObject: Soul;
       
         <div  id="AffiliatedSouls" class="flex-col border  w-full h-2/4 pl-5 left-10 top-10"> 
             put affiliated Souls here 
-            <button  on:click={showSbts} class=" w-48 h-12 btn btn-accent fontsize-100 " ><span class=" text-3xl text-white">show</span>  </button>  
+            <button  on:click={hasSoulFront} class=" w-48 h-12 btn btn-accent fontsize-100 " ><span class=" text-3xl text-white">hassoul</span>  </button>  
         </div>
     </div>
     
-    <div id="Confidence Score" class="w-2/4 h-5/6 border "> 
-  <!--   {#await hasSoulFront() then value}
+    <div id="Confidence Score" class="w-2/4 h-5/6 border grid gap-2 place-items-center "> 
+        <label class=" text-2xl text-white ">
+            Score for {soul}:
+        </label>
+         
+        <!--   {#await hasSoulFront() then value}
     {value}
     {/await} -->
     put score here
@@ -107,5 +132,6 @@ let SoulObject: Soul;
     </div>
 
 </div>
-{/if}
-
+<!-- {/if}
+ -->
+   
