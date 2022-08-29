@@ -9,7 +9,6 @@
 </script>
 
 
-
 <div style="background-image: url(/img/index-bg.png);" class="w-full h-full bg-cover fixed flex">
     <div class="relative top-28 left-28">
         <ButtonPrimary>

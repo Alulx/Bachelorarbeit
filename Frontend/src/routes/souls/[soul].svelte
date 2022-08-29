@@ -1,3 +1,9 @@
+<!--  <script context="module">
+    export async function load({fetch,page}){
+
+    }
+</script> -->
+ 
 <script lang="ts">
   import PageNotFound from '../../lib/universal/PageNotFound.svelte';
 
@@ -12,6 +18,7 @@ import type Contract from "web3/eth/contract";
 import type {Sbt} from "../../../../Backend/sbt"
 import type {Soul} from "../../../../Backend/soul"
 import { attestSBT, getSbtsBySoul, getSoul, hasSoul } from "$lib/sbtfunctions";
+import {page} from "$app/stores";
 evm.attachContract('sbtcontract',contractAddress.SBT, SBT_ABI.abi as AbiItem[])
  
 let sbtcontract: any;
@@ -23,36 +30,16 @@ let soul: string;
 let SoulObject: Soul;  
 let sbts: Sbt[];
 
-    selectedAccount.subscribe(async $selectedAccount => {
-        if (!$selectedAccount) return;
-
-        console.log('connected to account ', $selectedAccount)
-    })
-
    
-    connected.subscribe(async value => {
-        if (!value) return
-        soulExists = await $contracts.sbtcontract.methods.hasSoul(soul).call();
-        console.log('target has Soul:', soulExists);
-    }) 
-   
-
-    contracts.subscribe(async $contracts => {
-        if (!$contracts.sbtcontract) return;
-        SoulObject = await $contracts.sbtcontract.methods.getSoul(soul).call();
-        console.log('Soul is', SoulObject);
-        showSbts();
-    }) 
-
     onMount(async () => {
-      
-        soul = localStorage.getItem('soulSearched');
-        console.log("here is the searched soul: ", soul);
-        
+        /* soul =  $page.params.soul
+        console.log("here is the searched soul: ", soul); 
+         */
     });
     
     async function showSbts(){
-        console.log("Souls sbts are:",await getSbtsBySoul(soul, $contracts.sbtcontract));
+         console.log("Souls sbts are:",await getSbtsBySoul(soul, $contracts.sbtcontract)); 
+        return await getSbtsBySoul(soul, $contracts.sbtcontract);
     }
 
     async function AttestSBTFront(){
@@ -76,17 +63,64 @@ let sbts: Sbt[];
     }
 
     async function hasSoulFront(){
-        sbtcontract =  new $web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress.SBT)
-        console.log (await hasSoul(soul,sbtcontract));
+        return (await hasSoul(soul,$contracts.sbtcontract));
     }
 
+    let data = getData();
 
+    async function getData() {
+        soul =  $page.params.soul
+        console.log("here is the searched soul: ", soul); 
+
+        
+        await evm.setProvider();
+
+        if (!$web3.utils.isAddress(soul)){
+            console.log("no valid adress input")
+            return;
+        }
+       
+        connected.subscribe(async value => {
+            if (!value) return
+            soulExists = await $contracts.sbtcontract.methods.hasSoul(soul).call();
+            console.log('target has Soul:', soulExists);
+        }) 
+
+        selectedAccount.subscribe(async $selectedAccount => {
+        if (!$selectedAccount) return;
+
+        console.log('connected to account ', $selectedAccount)
+    })
+
+
+    contracts.subscribe(async $contracts => {
+        if (!$contracts.sbtcontract) return;
+        SoulObject = await $contracts.sbtcontract.methods.getSoul(soul).call();
+        console.log('Soul is', SoulObject);
+        showSbts();
+    })  
+
+
+
+      
+        return new Promise(resolve => {
+            setTimeout(async () => {
+               resolve({ soul: await hasSoulFront() , sbt: await showSbts() });
+            }, 1000);
+        }); 
+    }
 </script>
 
-<!-- {#if !soulExists}
-<PageNotFound></PageNotFound>
+ {#await data}
+ <p>Loading..</p> <!-- TODO: make loading page nice -->
+ {:then value}
 
-{:else} -->
+{#if soulExists}
+ {#each value.sbt as s}
+    <div class="flex flex-row"><p>{s}</p> <button>revoke </button></div>
+{/each}
+
+ {value.soul}
 <div style="background-image: url(/img/purple.jpg);" class="w-full h-full bg-cover fixed flex gap-3 p-5">
   
     <div id="AffiliatedSouls" class="border relative flex-col w-1/4 h-5/6  " >
@@ -132,6 +166,11 @@ let sbts: Sbt[];
     </div>
 
 </div>
+{:else}
+<PageNotFound></PageNotFound>
+{/if}
+
+{/await}
 <!-- {/if}
  -->
    

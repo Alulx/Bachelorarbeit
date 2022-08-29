@@ -225,7 +225,8 @@ async function setProfile(address: string, soulData: Soul): Promise<void> {
 }
 
 /**
- *
+ *  
+ * 
  * @param profileAddress
  * @param soulAddress  -The wallet addres of the soul
  */
