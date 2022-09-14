@@ -65,8 +65,9 @@ user.subscribe(value => {
     
     <a href="/about">About</a>
     <!-- use this instead of user store here-->
+    {#if $connected}
     <p class="ml-auto">{$selectedAccount}</p>
-
+    {/if}
     <div class="ml-auto mr-0">
         {#if $connected}
         <button  on:click={disconnect} class="btn btn-ghost">Disconnect </button>

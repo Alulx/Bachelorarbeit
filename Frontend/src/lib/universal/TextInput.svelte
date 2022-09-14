@@ -13,6 +13,7 @@
     
     function manageEnter(event: any){
         event.preventDefault();
+        //Code 13 = Enter
         if (event.keyCode === 13) {
             dispatch('searchEntered', {
                 search: $soulSearched
