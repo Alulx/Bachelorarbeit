@@ -42,13 +42,7 @@ let sbts: Sbt[];
         return await getSbtsBySoul(soul, $contracts.sbtcontract);
     }
 
-    async function showSbts() {
-        console.log(
-            "Souls sbts are:",
-            await getSbtsBySoul(soul, $contracts.sbtcontract)
-        );
-        return await getSbtsBySoul(soul, $contracts.sbtcontract)
-    }
+ 
 
     async function AttestSBTFront() {
         if (description === "") {
