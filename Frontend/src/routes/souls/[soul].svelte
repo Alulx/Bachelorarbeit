@@ -5,6 +5,11 @@
 </script> -->
  
 <script lang="ts">
+
+  import Score from '../../lib/Soulspage/Score.svelte';
+
+  import Soulinfo from '$lib/Soulspage/Soulinfo.svelte';
+
   import PageNotFound from '../../lib/universal/PageNotFound.svelte';
 
 import { onMount } from "svelte";
@@ -19,14 +24,16 @@ import type {Sbt} from "../../../../Backend/sbt"
 import type {Soul} from "../../../../Backend/soul"
 import { attestSBT, getSbtsBySoul, getSoul, hasSoul } from "$lib/sbtfunctions";
 import {page} from "$app/stores";
+import Sbtlist from '$lib/Soulspage/Sbtlist.svelte';
+    import AttestBox from '$lib/Soulspage/attest-box.svelte';
 evm.attachContract('sbtcontract',contractAddress.SBT, SBT_ABI.abi as AbiItem[])
  
 let sbtcontract: any;
 let reputation: boolean;
 let description = '';
 
-let soulExists;
-let soul: string;
+let soulExists: boolean;
+let searchedSoul: string;
 let SoulObject: Soul;  
 let sbts: Sbt[];
 
@@ -38,41 +45,45 @@ let sbts: Sbt[];
     });
     
     async function showSbts(){
-         console.log("Souls sbts are:",await getSbtsBySoul(soul, $contracts.sbtcontract)); 
-        return await getSbtsBySoul(soul, $contracts.sbtcontract);
+         console.log("Souls sbts are:",await getSbtsBySoul(searchedSoul, $contracts.sbtcontract)); 
+        return await getSbtsBySoul(searchedSoul, $contracts.sbtcontract);
     }
 
  
 
-    async function AttestSBTFront() {
-        if (description === "") {
+    async function attestSBTFront(event: { detail: { reputation: boolean; description: string; }; }) {
+        reputation = event.detail.reputation;
+        description = event.detail.description; 
+        console.log(description);
+        if (description === '') {
             alert("Please fill in a description ");
             return;
         }
-        await attestSBT(soul, $user, reputation, description, $contracts.sbtcontract);
+        await attestSBT(searchedSoul, $user, reputation, description, $contracts.sbtcontract);
     }
 
     async function hasSoulFront(){
-        return (await hasSoul(soul,$contracts.sbtcontract));
+        return (await hasSoul(searchedSoul,$contracts.sbtcontract));
     }
 
+    // Load in all data needed for display
     let data = getData();
 
     async function getData() {
-        soul =  $page.params.soul
-        console.log("here is the searched soul: ", soul); 
+        searchedSoul =  $page.params.soul
+        console.log("here is the searched soul: ", searchedSoul); 
 
         
         await evm.setProvider();
 
-        if (!$web3.utils.isAddress(soul)){
+        if (!$web3.utils.isAddress(searchedSoul)){
             console.log("no valid adress input")
             return;
         }
        
         connected.subscribe(async value => {
             if (!value) return
-            soulExists = await $contracts.sbtcontract.methods.hasSoul(soul).call();
+            soulExists = await $contracts.sbtcontract.methods.hasSoul(searchedSoul).call();
             console.log('target has Soul:', soulExists);
         }) 
 
@@ -85,20 +96,27 @@ let sbts: Sbt[];
 
     contracts.subscribe(async $contracts => {
         if (!$contracts.sbtcontract) return;
-        SoulObject = await $contracts.sbtcontract.methods.getSoul(soul).call();
+        SoulObject = await $contracts.sbtcontract.methods.getSoul(searchedSoul).call();
         console.log('Soul is', SoulObject);
+        sbts = await showSbts()
         showSbts();
-    })  
+    })
 
-
-
-      
-        return new Promise(resolve => {
-            setTimeout(async () => {
-               resolve({ soul: await hasSoulFront() , sbt: await showSbts() });
-            }, 1000);
-        }); 
+   /*  return new Promise(resolve => {
+        setTimeout(async () => {
+        resolve({ hasSoul: await hasSoulFront()  ,  sbt: await showSbts()  });
+        }, 1000);
+    }); 
+ */
+    // Just an empty promise to make svelte wait for the data to be loaded
+    return new Promise(resolve => {
+        setTimeout(async () => {
+        resolve({});
+        }, 1000);
+    });
     }
+
+
 </script>
 
  {#await data}
@@ -106,71 +124,20 @@ let sbts: Sbt[];
  {:then value}
 
 {#if soulExists}
- {#each value.sbt as s}
-    <div class="flex flex-row"><p>{s}</p> <button>revoke </button></div>
-{/each}
-
- {value.soul}
+ 
 <div style="background-image: url(/img/purple.jpg);" class="w-full h-full bg-cover fixed flex gap-3 p-5">
   
-    <div id="AffiliatedSouls" class="border relative flex-col w-1/4 h-5/6  " >
-        <div class="border  w-full h-2/4  left-10 top-10">
-            <button
-                on:click={showSbts}
-                class=" w-48 h-12 btn btn-accent fontsize-100 "
-                ><span class=" text-3xl text-white">show</span>
-            </button>
-            put identity and timestamp here
-        </div>
-
-        <div
-            id="AffiliatedSouls"
-            class="flex-col border  w-full h-2/4 pl-5 left-10 top-10"
-        >
-        put sbts here
-        </div>
+    <div id="Basic Information" class="border relative flex-col w-1/4 h-5/6">
+         <Soulinfo soul={SoulObject} on:showSbts={showSbts}/>
+         <Score soul={searchedSoul}></Score>
     </div>
 
-    <div
-        id="Confidence Score"
-        class="w-2/4 h-5/6 border grid gap-2 place-items-center "
-    >
-        <label class=" text-2xl text-white ">
-            Score for {soul}:
-        </label>
-
-        <!--   {#await hasSoulFront() then value}
-    {value}
-    {/await} -->
-        put score here
+    <div id="SbtList"class="w-2/4 h-5/6 border grid gap-2 place-items-center ">
+        <Sbtlist sbt={sbts} /> 
     </div>
 
-    <div class="w-1/4 h-5/6  border relative">
-        <div class="border  w-full h-2/4 ">
-            <label class="text-2xl text-white">
-                Attest an SBT to that Soul here
-            </label>
-
-            <label class="text-1xl text-white">
-                <input
-                    bind:checked={reputation}
-                    type="checkbox"
-                    class="border  input input-bordered input-accent w-full max-w-xs"
-                />
-            </label>
-
-            <input
-                bind:value={description}
-                type="text"
-                placeholder="SBT Description"
-                class="mb-5 input input-bordered input-accent w-full max-w-xs"
-            />
-            <button
-                on:click={AttestSBTFront}
-                class="w-48 h-12 btn btn-accent fontsize-100 "
-                ><span class=" text-3xl text-white">Attest</span>
-            </button>
-        </div>
+    <div class="w-1/4 h-5/6 border relative">
+        <AttestBox on:attestSbt={attestSBTFront} ></AttestBox>
 
         <div
             id="AffiliatedSouls"
