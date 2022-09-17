@@ -4,8 +4,16 @@
     import { connected, web3, selectedAccount, chainId, chainData, defaultEvmStores } from 'svelte-web3'
 
 	import { user } from '$lib/stores';
-
-
+    // add reactivity to chaind id; if 1137 say conencted to hardhat
+    /*
+        switch search bar with disconnect, put minting btn on toolbar, "find your soul shoulb be a text and find sol in society form paper"
+        mint page change to plain background dark grey
+        show friends  the page and see if they know
+        check soul status on page load
+        collect all metrics for algorithm use 
+   */
+/*
+ */
 </script>
 
 

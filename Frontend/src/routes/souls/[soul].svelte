@@ -101,7 +101,7 @@ let sbts: Sbt[];
         sbts = await showSbts()
         showSbts();
     })
-
+    
    /*  return new Promise(resolve => {
         setTimeout(async () => {
         resolve({ hasSoul: await hasSoulFront()  ,  sbt: await showSbts()  });

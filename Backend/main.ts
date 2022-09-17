@@ -11,9 +11,9 @@ const user1 = '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266';
 
 
 const soul1: Soul = {
-  identity: 'TESTEST', url: 'hochschule-mittweida.de', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
+  identity: 'TESTEST', url: 'hochschule-mittweida.de' };
 const soul2: Soul = {
-  identity: 'Jezz Befos', url: 'amzon-mittweida.de', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
+  identity: 'Jezz Befos', url: 'amzon-mittweida.de' };
 
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 const sbt =  new web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress); //  ?????
@@ -82,11 +82,11 @@ function initializeContract(): void {
  *  Mints a new Soul of the specified user
  *
  * @param address - The wallet addres of the soul
- * @param soulData - The Data of the specified sOul
+ * @param soulData - The Data of the specified soul
  */
 async function mintSoul(address: string, soulData: Soul): Promise<void> {
   console.log(`Minting Soul for  ${address}`);
-  await sbt.methods.mint(address, soulData).send({ from: address, gasPrice: '20000000000' }).
+  await sbt.methods.mint(address, soulData.identity, soulData.url).send({ from: address, gasPrice: '20000000000' }).
     catch((error) => {
       console.error(error.data.message);
     });
@@ -123,7 +123,7 @@ export async function hasSoul(address: string, sbt): Promise<boolean> {
  * @param soulData - The data to be changed about the soul
  */
 async function updateSoul(address: string, soulData: Soul): Promise<void> {
-  await sbt.methods.update(address, soulData).send({ from: address, gasPrice: '20000000000' })
+  await sbt.methods.update(address, soulData.identity, soulData.url).send({ from: address, gasPrice: '20000000000' })
     .catch((error) => {
       console.error(error.data.message);
     });
@@ -210,6 +210,11 @@ async function createNetwork(): Promise<void> {
   }
   await attestSBT('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', '0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', true, 'test SBT');
   await attestSBT('0x70997970C51812dc3A010C7d01b50e0d17dc79C8', '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'test self mint');
+  await attestSBT('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'Nein DU!');
+  await attestSBT('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'Nein DU!');
+  await attestSBT('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'Nein DU!');
+  await attestSBT('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'Nein DU!');
+  await attestSBT('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'Nein DU!');
   await attestSBT('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'Nein DU!');
 
 }

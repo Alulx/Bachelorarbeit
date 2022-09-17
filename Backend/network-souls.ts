@@ -3,22 +3,22 @@
 import { Soul } from 'soul';
 
 const DevelopmentSoul1: Soul = {
-  identity: 'Richard Stallman', url: 'gnu.org', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
+  identity: 'Richard Stallman', url: 'gnu.org' };
 
 const DevelopmentSoul2: Soul = {
-  identity: 'Mike Krieger', url: 'Snapchat.com', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
+  identity: 'Mike Krieger', url: 'Snapchat.com' };
 
 const DevelopmentSoul3: Soul = {
-  identity: 'Linus Torvalds', url: 'linux.org', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
+  identity: 'Linus Torvalds', url: 'linux.org' };
 
 const ethSoul: Soul = {
-  identity: 'Vitalik Butering', url: 'ethereum.org', score: Math.floor(Math.random() * 100), timestamp: Date.now() };
+  identity: 'Vitalik Butering', url: 'ethereum.org' };
 
 const dogeSoul: Soul = {
-  identity: 'Such W0W', url: 'Dogec0in.org', score: 999, timestamp: Date.now() };
+  identity: 'Such W0W', url: 'Dogec0in.org' };
 
 const microsoftSoul: Soul = {
-  identity: 'Certified Technician', url: 'Micr0s0ft.ru', score: 0, timestamp: Date.now() };
+  identity: 'Certified Technician', url: 'Micr0s0ft.ru' };
 
 export const networkSouls: Soul[] = [
   DevelopmentSoul1,

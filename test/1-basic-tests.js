@@ -6,21 +6,18 @@ describe('SBT', function () {
   before(async () => {
     [owner,user1,user2,user3] = await ethers.getSigners();
     const SBTContract = await ethers.getContractFactory('SBT');
-    sbt = await SBTContract.deploy('Test SBT Token', 'SBT');
+    sbt = await SBTContract.deploy();
   });
 
-  it('Should return the name and ticker', async function () {
-    expect(await sbt.name()).to.equal('Test SBT Token');
-    expect(await sbt.ticker()).to.equal('SBT');
-  });
+ 
 
   it('hasSoul should return false for new query', async function () {
     expect(await sbt.hasSoul(user1.address)).to.equal(false);
   });
 
   it('Should mint a new soul', async function () {
-    const soul = ['James Bachini', 'https://jamesbachini.com', 99, new Date().getTime()];
-    await sbt.mint(user1.address,soul);
+    const soul = ['James Bachini', 'https://jamesbachini.com'];
+    await sbt.mint(user1.address,soul[0],soul[1]);
   });
 
   it('hasSoul should return true', async function () {
@@ -36,14 +33,14 @@ describe('SBT', function () {
   it('Soulowner should be able to update soul', async function () {
     //console.log(user1.address);
 
-    const soul = ['James Bachini', 'https://jamesbachini.com', 80, new Date().getTime()];
-    await sbt.connect(user1).update(user1.address,soul);
+    const soul = ['James James', 'google.com'];
+    await sbt.connect(user1).update(user1.address,soul[0],soul[1]);
   });
 
   it('getSoul should return the updated value', async function () {
     const soul = await sbt.getSoul(user1.address);
     //console.log(soul);
-    expect(soul[2]).to.equal(80);
+    expect(soul[0]).to.equal('James James');
   });
 
  
@@ -57,10 +54,10 @@ describe('SBT', function () {
    });  
 
   it('Should mint another soul for user2 ', async function () {
-    const soul = ['Alice Smith', 'https://github.com', 42, new Date().getTime()];
-    await sbt.mint(user2.address,soul);
+    const soul = ['Alice Smith', 'https://github.com'];
+    await sbt.mint(user2.address,soul[0],soul[1]);
   });
-
+  
   it('Should not mint an SBT for user2', async function () {
     await expect(sbt.attest(user2.address,true, "is good")).to.be.revertedWith('Attester has to have a Soul themselves');
    });  
@@ -109,8 +106,14 @@ describe('SBT', function () {
     expect(await sbt.soulSbtCount(user2.address)).to.equal(1);
   });
 
+  it('Should output the current time of user2 sbt', async function () {
+    let [tokenId, attester, reputation, explanation_url, active, timestamp] = await sbt.sbts(0)
+    var date = new Date(timestamp * 1000);
+    console.log(date.getDate() + "/" + (date.getMonth()+1) + "/" + date.getFullYear() + "/" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds());
+  }); 
+
   it('Should display active:false ' , async function() {
-    let [tokenId, attester, reputation, explanation_url, active] = await sbt.sbts(0)
+    let [tokenId, attester, reputation, explanation_url, active, timestamp] = await sbt.sbts(0)
     expect (active).to.equal(false);
   });
 
@@ -138,6 +141,7 @@ describe('SBT', function () {
     expect(await sbt.hasSoul(user2.address)).to.equal(false);
   }); 
   
+
 /* 
   it('3rd party should be able to create a profile', async function () {
     const soul = ['Alice', 'https://google.com', 92, new Date().getTime()];

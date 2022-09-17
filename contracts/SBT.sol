@@ -17,7 +17,6 @@ contract SBT {
         string url;
         uint256 score;
         uint256 timestamp;
-
     }
 
     struct Sbt {
@@ -25,7 +24,9 @@ contract SBT {
         address attester;
         bool reputation; 
         string explanation_url;
-        bool active;      
+        bool active;  
+        uint256 timestamp;
+ 
     }
 
     Sbt[] public sbts;
@@ -37,9 +38,7 @@ contract SBT {
     mapping (address => mapping (address => Soul)) soulProfiles;
     mapping (address => address[]) private profiles;
 
-    string public name;
-    string public ticker;
-    address public operator;
+
     bytes32 private zeroHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
     
     event Attest(address _soul);
@@ -52,17 +51,11 @@ contract SBT {
 
     uint tokenId = 0; 
 
-    constructor(string memory _name, string memory _ticker) {
-      name = _name;
-      ticker = _ticker;
-      operator = msg.sender;
-    }
-
     function attest(address _targetSoul, bool _reputation, string memory _explanation_url) external {
         //Target soul has to exist
         require(keccak256(bytes(souls[_targetSoul].identity)) != zeroHash, "Cannot send SBT to Soul that has not been minted");
         require(keccak256(bytes(souls[msg.sender].identity)) != zeroHash, "Attester has to have a Soul themselves");
-    	sbts.push(Sbt(tokenId, msg.sender, _reputation, _explanation_url, true));
+    	sbts.push(Sbt(tokenId, msg.sender, _reputation, _explanation_url, true, block.timestamp));
         SbtToSoul[tokenId] = _targetSoul;
         soulSbtCount[_targetSoul]++;
         tokenId++;
@@ -96,17 +89,16 @@ contract SBT {
         return result; 
     }
 
-    function mint(address _soul, Soul memory _soulData) external {
+    function mint(address _soul, string memory identity, string memory url) external {
         require(keccak256(bytes(souls[_soul].identity)) == zeroHash, "Soul already exists");
-        //require(msg.sender == operator, "Only operator can mint new souls");
-        souls[_soul] = _soulData;
+        souls[_soul] = Soul({identity: identity, url: url, score: 0, timestamp: block.timestamp});
         emit Mint(_soul);
     }
 
     function burn(address _soul) external {
         require(msg.sender == _soul, "Only Soul Owner have rights to delete their data");
 
-    /*      // auto revoke souls attested sbts
+        /*   // auto revoke souls attested sbts
         for (uint i=0; i<sbts.length; i++) {
             if (sbts[tokenId].attester == _soul) {
                revoke(tokenId);
@@ -127,9 +119,10 @@ contract SBT {
         emit Burn(_soul);
     }
 
-    function update(address _soul, Soul memory _soulData) external {
+    function update(address _soul, string memory identity, string memory url) external {
         require(msg.sender == _soul, "Only users can update soul data");
-        souls[_soul] = _soulData;
+        souls[_soul].identity = identity;
+        souls[_soul].url = url;
         emit Update(_soul);
     }
 
@@ -156,7 +149,9 @@ contract SBT {
             }
         }
         return false;
-    }    
+    }   
+    
+     
     /**
      * Profiles are used by 3rd parties and individual users to store data.
      * Data is stored in a nested mapping relative to msg.sender
