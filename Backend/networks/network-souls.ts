@@ -1,6 +1,6 @@
 // File to host different Souls of the personalities
 
-import { Soul } from 'soul';
+import { Soul } from '../models/soul';
 
 const DevelopmentSoul1: Soul = {
   identity: 'Richard Stallman', url: 'gnu.org', score: Math.floor(Math.random() * 100), timestamp: Date.now() };

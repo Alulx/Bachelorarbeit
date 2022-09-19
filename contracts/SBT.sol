@@ -23,9 +23,9 @@ contract SBT {
     struct Sbt {
         uint tokenId;
         address attester;
-        bool reputation; 
+        bool reputation;
         string explanation_url;
-        bool active;      
+        bool active;
     }
 
     Sbt[] public sbts;
@@ -37,11 +37,8 @@ contract SBT {
     mapping (address => mapping (address => Soul)) soulProfiles;
     mapping (address => address[]) private profiles;
 
-    string public name;
-    string public ticker;
-    address public operator;
     bytes32 private zeroHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
-    
+
     event Attest(address _soul);
     event Revoke(uint _tokenId);
     event Mint(address _soul);
@@ -50,19 +47,14 @@ contract SBT {
     event SetProfile(address _profiler, address _soul);
     event RemoveProfile(address _profiler, address _soul);
 
-    uint tokenId = 0; 
+    uint tokenId = 0;
 
-    constructor(string memory _name, string memory _ticker) {
-      name = _name;
-      ticker = _ticker;
-      operator = msg.sender;
-    }
 
     function attest(address _targetSoul, bool _reputation, string memory _explanation_url) external {
         //Target soul has to exist
         require(keccak256(bytes(souls[_targetSoul].identity)) != zeroHash, "Cannot send SBT to Soul that has not been minted");
         require(keccak256(bytes(souls[msg.sender].identity)) != zeroHash, "Attester has to have a Soul themselves");
-    	sbts.push(Sbt(tokenId, msg.sender, _reputation, _explanation_url, true));
+        sbts.push(Sbt(tokenId, msg.sender, _reputation, _explanation_url, true));
         SbtToSoul[tokenId] = _targetSoul;
         soulSbtCount[_targetSoul]++;
         tokenId++;
@@ -78,7 +70,7 @@ contract SBT {
         sbts[_tokenId].active = false;
 
 /*  Deleting option
-     delete[SbtToSoul[_tokenId]];
+    delete[SbtToSoul[_tokenId]];
         delete sbts[_tokenId];
  */
         emit Revoke(_tokenId);
@@ -93,7 +85,7 @@ contract SBT {
                 counter++;
             }
         }
-        return result; 
+        return result;
     }
 
     function mint(address _soul, Soul memory _soulData) external {
@@ -109,19 +101,19 @@ contract SBT {
     /*      // auto revoke souls attested sbts
         for (uint i=0; i<sbts.length; i++) {
             if (sbts[tokenId].attester == _soul) {
-               revoke(tokenId);
+            revoke(tokenId);
             }
         } */
 
        // delete users sbts
         for (uint i=0; i<sbts.length; i++) {
             if (SbtToSoul[i] == _soul) {
-                //sbts[i].active = false; 
+                //sbts[i].active = false;
                 delete sbts[i];
-                delete SbtToSoul[i]; 
+                delete SbtToSoul[i];
             }
         }
-      
+
         delete souls[_soul];
         delete soulSbtCount[_soul];
         emit Burn(_soul);
@@ -156,41 +148,5 @@ contract SBT {
             }
         }
         return false;
-    }    
-    /**
-     * Profiles are used by 3rd parties and individual users to store data.
-     * Data is stored in a nested mapping relative to msg.sender
-     * By default they can only store data on addresses that have been minted
-     */
-    function setProfile(address _soul, Soul memory _soulData) external {
-        require(keccak256(bytes(souls[_soul].identity)) != zeroHash, "Cannot create a profile for a soul that has not been minted");
-        soulProfiles[msg.sender][_soul] = _soulData;
-        profiles[_soul].push(msg.sender);
-        emit SetProfile(msg.sender, _soul);
     }
-
-    function getProfile(address _profiler, address _soul) external view returns (Soul memory) {
-        return soulProfiles[_profiler][_soul];
-    }
-
-    function listProfiles(address _soul) external view returns (address[] memory) {
-        return profiles[_soul];
-    }
-
-    function hasProfile(address _profiler, address _soul) external view returns (bool) {
-        if (keccak256(bytes(soulProfiles[_profiler][_soul].identity)) == zeroHash) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
-    function removeProfile(address _profiler, address _soul) external {
-        require(msg.sender == _soul, "Only users have rights to delete their profile data");
-        delete soulProfiles[_profiler][msg.sender];
-        emit RemoveProfile(_profiler, _soul);
-    }
-
-
-    
 }

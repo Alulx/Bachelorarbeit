@@ -6,13 +6,9 @@ describe('SBT', function () {
   before(async () => {
     [owner,user1,user2,user3] = await ethers.getSigners();
     const SBTContract = await ethers.getContractFactory('SBT');
-    sbt = await SBTContract.deploy('Test SBT Token', 'SBT');
+    sbt = await SBTContract.deploy();
   });
 
-  it('Should return the name and ticker', async function () {
-    expect(await sbt.name()).to.equal('Test SBT Token');
-    expect(await sbt.ticker()).to.equal('SBT');
-  });
 
   it('hasSoul should return false for new query', async function () {
     expect(await sbt.hasSoul(user1.address)).to.equal(false);
@@ -46,15 +42,10 @@ describe('SBT', function () {
     expect(soul[2]).to.equal(80);
   });
 
- 
-
-  it('hasProfile should return false', async function () {
-    expect(await sbt.hasProfile(user1.address,user2.address)).to.equal(false);
-  });
 
   it('Should not mint an SBT for user2', async function () {
     await expect(sbt.attest(user2.address,true, "is good")).to.be.revertedWith('Cannot send SBT to Soul that has not been minted');
-   });  
+   });
 
   it('Should mint another soul for user2 ', async function () {
     const soul = ['Alice Smith', 'https://github.com', 42, new Date().getTime()];
