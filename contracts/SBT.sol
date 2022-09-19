@@ -26,6 +26,7 @@ contract SBT {
         bool reputation;
         string explanation_url;
         bool active;
+        uint256 timestamp;
     }
 
     Sbt[] public sbts;
@@ -54,7 +55,7 @@ contract SBT {
         //Target soul has to exist
         require(keccak256(bytes(souls[_targetSoul].identity)) != zeroHash, "Cannot send SBT to Soul that has not been minted");
         require(keccak256(bytes(souls[msg.sender].identity)) != zeroHash, "Attester has to have a Soul themselves");
-        sbts.push(Sbt(tokenId, msg.sender, _reputation, _explanation_url, true));
+        sbts.push(Sbt(tokenId, msg.sender, _reputation, _explanation_url, true, block.timestamp));
         SbtToSoul[tokenId] = _targetSoul;
         soulSbtCount[_targetSoul]++;
         tokenId++;

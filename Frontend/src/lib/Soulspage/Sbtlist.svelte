@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Sbt } from "../../../../Backend/sbt";
+    import type { Sbt } from "../../../../Backend/models/sbt";
 
     export let sbt: Sbt[];
 
@@ -10,8 +10,10 @@
         {#each sbt as s}
             <div class="{s.reputation ? 'positive' : 'negative'}">
                 <p class="font-bold ">TokenId: {s.tokenId} </p> 
-                <p class="font-bold "> Attested by {s.attester} </p> 
-                <p class="font-bold "> Description: {s.explanation_url} </p> 
+                <p class="font-bold "> Attested by <a href={s.attester} target="_blank">{s.attester}</a> </p> 
+                <p class="font-bold "> Description: {s.explanation_url} </p>
+                <p class="font-bold "> active: {s.active} </p>
+                <p class="font-bold "> timestamp: { new Date(Number(s.timestamp * 1000)).toLocaleDateString("en-GB")} </p>
             </div>
         {/each} 
     
@@ -24,8 +26,6 @@
         flex-direction: row;
         margin: 0.25rem;
         background-color: rgb(209 250 229);
-
-
     }
 
     .negative{
@@ -35,7 +35,6 @@
         flex-direction: row;
         margin: 0.25rem;
         background-color: rgb(251 207 232);
-
     }
 
 

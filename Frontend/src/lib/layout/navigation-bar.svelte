@@ -27,11 +27,10 @@ async function disconnect(){
 }
 
 async function connect(){
-         await defaultEvmStores.setProvider() 
-         localStorage.setItem('isWalletConnected', "true");
-         let address =  await $web3.eth.getAccounts()
-         user.set(address[0]);
-
+        await defaultEvmStores.setProvider() 
+        localStorage.setItem('isWalletConnected', "true");
+        let address =  await $web3.eth.getAccounts()
+        user.set(address[0]);
     }
 
 /**

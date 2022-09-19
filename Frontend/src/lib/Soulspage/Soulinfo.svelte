@@ -6,11 +6,6 @@ const dispatch = createEventDispatcher();
 
     export let soul: Soul;
 
-    async function showSbts(){
-        dispatch('showSbts', {
-		});
-    }
-
 </script> 
 
 
@@ -18,5 +13,5 @@ const dispatch = createEventDispatcher();
      <p class="font-bold text-xl pb-2 underline">Basic Information</p>
      <p class="font-bold text-xl pb-2"  > Identity: {soul.identity}</p> 
      <p class="font-bold text-xl pb-2 "> URL: {soul.url} </p> 
-     <p class="font-bold text-xl pb-2"> Created at: { new Date(Number(soul.timestamp)).toLocaleDateString("en-GB")}</p> 
+     <p class="font-bold text-xl pb-2"> Created at: {new Date(Number(soul.timestamp * 1000)).toLocaleDateString("en-GB")}</p> 
 </div>

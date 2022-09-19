@@ -20,8 +20,8 @@ import type { AbiItem } from "web3-utils";
 import SBT_ABI from "../../contracts/SBT.json";
 import contractAddress from "../../contracts/contract-address.json";
 import type Contract from "web3/eth/contract";
-import type {Sbt} from "../../../../Backend/sbt"
-import type {Soul} from "../../../../Backend/soul"
+import type {Sbt} from "../../../../Backend/models/sbt"
+import type {Soul} from "../../../../Backend/models/soul"
 import { attestSBT, getSbtsBySoul, getSoul, hasSoul } from "$lib/sbtfunctions";
 import {page} from "$app/stores";
 import Sbtlist from '$lib/Soulspage/Sbtlist.svelte';
@@ -34,22 +34,13 @@ let description = '';
 
 let soulExists: boolean;
 let searchedSoul: string;
-let SoulObject: Soul;  
+let SoulObject: Soul;
 let sbts: Sbt[];
 
-   
-    onMount(async () => {
-        /* soul =  $page.params.soul
-        console.log("here is the searched soul: ", soul); 
-         */
-    });
-    
-    async function showSbts(){
-         console.log("Souls sbts are:",await getSbtsBySoul(searchedSoul, $contracts.sbtcontract)); 
+    async function getSbts(){
+        console.log("Souls sbts are:",await getSbtsBySoul(searchedSoul, $contracts.sbtcontract));
         return await getSbtsBySoul(searchedSoul, $contracts.sbtcontract);
     }
-
- 
 
     async function attestSBTFront(event: { detail: { reputation: boolean; description: string; }; }) {
         reputation = event.detail.reputation;
@@ -62,10 +53,6 @@ let sbts: Sbt[];
         await attestSBT(searchedSoul, $user, reputation, description, $contracts.sbtcontract);
     }
 
-    async function hasSoulFront(){
-        return (await hasSoul(searchedSoul,$contracts.sbtcontract));
-    }
-
     // Load in all data needed for display
     let data = getData();
 
@@ -73,19 +60,19 @@ let sbts: Sbt[];
         searchedSoul =  $page.params.soul
         console.log("here is the searched soul: ", searchedSoul); 
 
-        
+
         await evm.setProvider();
 
         if (!$web3.utils.isAddress(searchedSoul)){
             console.log("no valid adress input")
             return;
         }
-       
+
         connected.subscribe(async value => {
             if (!value) return
             soulExists = await $contracts.sbtcontract.methods.hasSoul(searchedSoul).call();
             console.log('target has Soul:', soulExists);
-        }) 
+        })
 
         selectedAccount.subscribe(async $selectedAccount => {
         if (!$selectedAccount) return;
@@ -98,8 +85,7 @@ let sbts: Sbt[];
         if (!$contracts.sbtcontract) return;
         SoulObject = await $contracts.sbtcontract.methods.getSoul(searchedSoul).call();
         console.log('Soul is', SoulObject);
-        sbts = await showSbts()
-        showSbts();
+        sbts = await getSbts()
     })
 
    /*  return new Promise(resolve => {
@@ -128,12 +114,12 @@ let sbts: Sbt[];
 <div style="background-image: url(/img/purple.jpg);" class="w-full h-full bg-cover fixed flex gap-3 p-5">
   
     <div id="Basic Information" class="border relative flex-col w-1/4 h-5/6">
-         <Soulinfo soul={SoulObject} on:showSbts={showSbts}/>
-         <Score soul={searchedSoul}></Score>
+         <Soulinfo soul={SoulObject}/>
+         <Score soul={SoulObject} searchedSoul={searchedSoul}></Score>
     </div>
 
     <div id="SbtList"class="w-2/4 h-5/6 border grid gap-2 place-items-center ">
-        <Sbtlist sbt={sbts} /> 
+        <Sbtlist sbt={sbts} />
     </div>
 
     <div class="w-1/4 h-5/6 border relative">

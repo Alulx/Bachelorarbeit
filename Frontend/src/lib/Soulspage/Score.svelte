@@ -1,32 +1,28 @@
 <script lang="ts">
-    import type { Soul } from "../../../../Backend/soul";
-
-        export let soul: string;
+    
+        export let soul: Soul;
+        export let searchedSoul: string;
 
     </script>
 
  
-  <div class=" text-center justify-center w-full h-3/4  left-10 top-10">
-    <p class=" text-xl text-white ">
-        Score for {soul}
+  <div class="bg-secondary text-center justify-center w-full h-3/4  left-10 top-10">
+    <p class=" text text-white ">
+        Score for {searchedSoul}
     </p>
     
 
     <div class=""> 
 
         <div class="flex flex-row justify-center items-center">
-            <div class="flex flex-col justify-center items-center">
+            <div class="flex flex-col justify-center items-center pt-10">
                 <p class="text-2xl text-white">Reputation</p>
-                <p class="text-2xl text-white">0</p>
+                <p class="text-2xl text-white">{soul.score}</p>
             </div>
-            <div class="flex flex-col justify-center items-center">
-                <p class="text-2xl text-white">Trust</p>
-                <p class="text-2xl text-white">0</p>
+            <div class ="flex flex-col justify-center items-center pt-10">
+                <img src="/img/caution.png" alt="danger" >
             </div>
-            <div class="flex flex-col justify-center items-center">
-                <p class="text-2xl text-white">Trustworthiness</p>
-                <p class="text-2xl text-white">0</p>
-            </div>
+
         </div>
     </div>
 </div>

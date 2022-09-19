@@ -4,4 +4,5 @@ export interface Sbt {
     reputation: boolean;
     explanation_url: string;
     active: boolean;
+    timestamp: number;
 }
