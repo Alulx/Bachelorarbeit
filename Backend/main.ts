@@ -31,11 +31,14 @@ main();
 async function main(): Promise<void> {
   console.log('Starting DeRep...');
   initializeContract();
-  //   await createCircleOfTrust();
-  // const ola = await getSoul(user1);
+  if (!await hasSoul(user1)) {
+    await createCircleOfTrust();
+  }
+ 
+
+  //console.log(await getSoul(user1));
   const score = await generateScore(user1, 1);
   console.log(score);
-
 }
 
 /**
