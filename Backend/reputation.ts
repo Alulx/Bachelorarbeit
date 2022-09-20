@@ -10,7 +10,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
 const sbt =  new web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress);
 let score = 0;
 
-
+const SBTCOUNTCAP = 15;
 /**
  * Algorithm to get Score
  * output: number from 0-100
@@ -57,7 +57,7 @@ export async function generateScore(address: string, depth?: number): Promise<nu
 
 
   // console.log(soul, sbts, sbtCount);
-  score = 0.2 *  soulTimestampScore +  0.8 * (sbtCountScore * 0.45);
+  score = 0.2 *  soulTimestampScore +  0.8 * ( sbtCountScore * 0.45);
   return score;
 }
 
@@ -90,32 +90,21 @@ function calculateSoulTimestampScore(timestamp: number): number {
  * @param sbts - Sbt[] - Array of sbts of the soul
  */
 function calculateSbtCountScore(sbts: Sbt[]): number {
+  // only consider sbts with active flag true
+  sbts = sbts.filter((sbt) => sbt.active);
+
+
   let score = 0;
   const sbtCount = sbts.length;
-  score = sbtCount > 20 ?
+  score = sbtCount > SBTCOUNTCAP ?
     1 :
-    sbtCount / 20;
+    sbtCount / SBTCOUNTCAP;
 
   console.log('sbtcountscore based only on quantity:', score);
-  //  check if sbt comes from different souls, sbts from the same souls yield diminishing returns
-  /*   const sbtSouls = sbts.map((sbt) => sbt.attester);
-  const uniqueSbtSouls = sbtSouls.filter((soul, index) => sbtSouls.indexOf(soul) === index);
-  const uniqueSbtCount = uniqueSbtSouls.length;
-  console.log('uniqueSbtCount:', uniqueSbtCount);
-  console.log('sbtCount:', sbtCount);
-  if (uniqueSbtCount < sbtCount / 2) {
-    score = score * 0.8;
-  }
-  console.log('sbtcountscore:', score);
-  return score;  */
-
-  // Check if sbts come from the same soul, if it is the same the effectiveness on the score should diminish until it is only worth 20%
-  
-
 
   /*
-  * Effectively this block makes it that one person can effectively one give one sbt to each other
-
+  * this block makes it that one person can effectively one give one sbt to each other to get score
+  */
   const sbtSouls = sbts.map((sbt) => sbt.attester);
   const uniqueSoulCount = new Set(sbtSouls).size;
   console.log('uniqueSoulCount:', uniqueSoulCount);
@@ -125,9 +114,25 @@ function calculateSbtCountScore(sbts: Sbt[]): number {
   score = score * ( uniqueSoulCount / sbtSouls.length );
   console.log('sbtcountscore:', score);
 
+
+
   return score;
-  */
+}
 
-
-
+/**
+ *
+ */
+function calculateSbtQuality() {
+  score = 0;
+  //  check how many attesters have no sbts themselves and disregard them for score if it is 0
+  const affiliatedSoulsSbts = await Promise.all(sbts.map(async(sbt) => await getSbtsBySoul(sbt.attester)));
+  const affiliatedSoulsThatHabeSbts = affiliatedSoulsSbts.map((affiliatedSoulsSbts) => affiliatedSoulsSbts.length);
+  const affiliatedSoulsThatHabeSbtsSum = affiliatedSoulsThatHabeSbts.reduce((a, b) => a + b, 0);
+  console.log('affiliatedSoulsThatHabeSbtsSum:', affiliatedSoulsThatHabeSbtsSum);
+  console.log('affiliatedSoulsThatHabeSbts:', affiliatedSoulsThatHabeSbts);
+  console.log('affiliatedSoulsThatHabeSbts:', affiliatedSoulsThatHabeSbts.length);
+  console.log('affiliatedSoulsThatHabeSbts score', affiliatedSoulsThatHabeSbtsSum / affiliatedSoulsThatHabeSbts.length );
+  score = score * ( affiliatedSoulsThatHabeSbtsSum / affiliatedSoulsThatHabeSbts.length );
+  console.log('sbtcountscore:', score);
+  return score;
 }

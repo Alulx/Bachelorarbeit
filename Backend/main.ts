@@ -34,6 +34,7 @@ async function main(): Promise<void> {
   if (!await hasSoul(user1)) {
     await createCircleOfTrust();
   }
+  await attestSBT(user1, user4, true, description);
 
   // console.log(await getSoul(user1));
   const score = await generateScore(user1, 1);
