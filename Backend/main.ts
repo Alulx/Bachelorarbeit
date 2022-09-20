@@ -34,9 +34,8 @@ async function main(): Promise<void> {
   if (!await hasSoul(user1)) {
     await createCircleOfTrust();
   }
- 
 
-  //console.log(await getSoul(user1));
+  // console.log(await getSoul(user1));
   const score = await generateScore(user1, 1);
   console.log(score);
 }

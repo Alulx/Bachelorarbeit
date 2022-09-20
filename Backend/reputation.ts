@@ -38,7 +38,7 @@ let score = 0;
  *  ~ 20%
  *
  *
- * sbt timestamp  (max out at 1 month with 100% impact) 
+ * sbt timestamp  (max out at 1 month with 100% impact)
  * ~ 15%
  *
  *
@@ -98,7 +98,7 @@ function calculateSbtCountScore(sbts: Sbt[]): number {
 
   console.log('sbtcountscore based only on quantity:', score);
   //  check if sbt comes from different souls, sbts from the same souls yield diminishing returns
-/*   const sbtSouls = sbts.map((sbt) => sbt.attester);
+  /*   const sbtSouls = sbts.map((sbt) => sbt.attester);
   const uniqueSbtSouls = sbtSouls.filter((soul, index) => sbtSouls.indexOf(soul) === index);
   const uniqueSbtCount = uniqueSbtSouls.length;
   console.log('uniqueSbtCount:', uniqueSbtCount);
@@ -108,7 +108,15 @@ function calculateSbtCountScore(sbts: Sbt[]): number {
   }
   console.log('sbtcountscore:', score);
   return score;  */
-   const sbtSouls = sbts.map((sbt) => sbt.attester);
+
+  // Check if sbts come from the same soul, if it is the same the effectiveness on the score should diminish until it is only worth 20%
+  
+
+
+  /*
+  * Effectively this block makes it that one person can effectively one give one sbt to each other
+
+  const sbtSouls = sbts.map((sbt) => sbt.attester);
   const uniqueSoulCount = new Set(sbtSouls).size;
   console.log('uniqueSoulCount:', uniqueSoulCount);
   console.log('sbtSouls:', sbtSouls);
@@ -116,8 +124,9 @@ function calculateSbtCountScore(sbts: Sbt[]): number {
   console.log('uniqueness score', uniqueSoulCount / sbtSouls.length );
   score = score * ( uniqueSoulCount / sbtSouls.length );
   console.log('sbtcountscore:', score);
-  return score; 
 
+  return score;
+  */
 
 
 
