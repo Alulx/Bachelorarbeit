@@ -19,7 +19,7 @@ function AttestSBTFront() {
 
 </script>
 
-<div class="border  w-full h-2/4 ">
+<div class="pl-1 border  bg-primary w-full h-2/4 ">
             <p class="text-2xl text-white">
                 Attest an SBT to that Soul here
             </p>

@@ -1,13 +1,29 @@
-import type { Soul } from '../../../Backend/models/soul';
+import type { RequestHandler } from '@sveltejs/kit';
+import path from 'node:path';
+import  { getSbtsBySoul, getSoul }  from '$lib/sbtfunctions';
+import type { Sbt } from '../../../../Backend/models/sbt';
+import type { Soul } from '../../../../Backend/models/soul';
 import Web3 from 'web3';
 import type { AbiItem } from 'web3-utils';
-import SBT_ABI from '../contracts/SBT.json';
-import type { Sbt } from '../../../Backend/models/sbt';
-import  { getSbtsBySoul, getSoul, getSoul }  from '$lib/sbtfunctions';
+import SBT_ABI from '../../contracts/SBT.json';
+import type { Contract } from 'web3-eth-contract';
+const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
+const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+const sbt =  new web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress);
+
+const SBTCOUNTCAP = 10;
 let score = 0;
+export const GET: RequestHandler = async({ url }) => {
 
-const SBTCOUNTCAP = 15;
+  const searchedSoul = String(url.searchParams.get('searchedSoul'));
+
+  const scores = await generateScore(searchedSoul, sbt);
+  console.log('final score:', scores);
+  return new Response(String(scores));
+};
+
+
 /**
  * Algorithm to get Score
  * output: number from 0-100
@@ -43,7 +59,7 @@ const SBTCOUNTCAP = 15;
  * @param address - The souls address to be generated a score for
  * @param sbt - The Contract instance needed to talk with the smart contract
  */
-export async function generateScore(address: string,  sbt): Promise<number> {
+export async function generateScore(address: string,  sbt: Contract): Promise<number[]> {
 
   // Fetching Phase
   const soul = await getSoul(address, sbt);
@@ -51,11 +67,19 @@ export async function generateScore(address: string,  sbt): Promise<number> {
 
   // Calculation Phase
   const soulScore = calculateSoulTimestampScore(soul.timestamp);
-  const sbtScore = await calculateSbtScore(sbts, address);
+  const [
+    sbtScore,
+    quantityscore,
+    qualityScore,
+  ] = await calculateSbtScore(sbts, address);
 
   // Output Phase
   score = 0.2 *  soulScore +  0.8 * sbtScore ;
-  return score;
+  return [
+    score,
+    quantityscore,
+    qualityScore,
+  ];
 }
 
 /**
@@ -88,7 +112,7 @@ function calculateSoulTimestampScore(timestamp: number): number {
  * @param sbts - The Array of sbts of the soul
  * @param address - string - The souls address
  */
-async function calculateSbtScore(sbts: Sbt[], address: string): Promise<number> {
+async function calculateSbtScore(sbts: Sbt[], address: string): Promise<number[]> {
   // only consider sbts with active flag true , true reputation and attester != soul
   sbts = sbts.filter((sbt) => sbt.active && sbt.reputation && sbt.attester !== address);
 
@@ -98,9 +122,13 @@ async function calculateSbtScore(sbts: Sbt[], address: string): Promise<number> 
   const quantityScore = calculateSbtQuantityScore(sbts);
   const qualityScore = await calculateSbtQualityScore(sbts);
 
-  score = quantityScore * 0.55  + qualityScore * 0.45; // 55% quantity, 45% quality, because quantity is easier to measure
+  score = quantityScore * 0.65  + qualityScore * 0.35; // 65% quantity, 45% quality, because quantity is easier to measure
 
-  return score;
+  return [
+    score,
+    quantityScore,
+    qualityScore,
+  ];
 }
 
 

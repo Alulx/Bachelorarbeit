@@ -22,8 +22,8 @@ import contractAddress from "../../contracts/contract-address.json";
 import type Contract from "web3/eth/contract";
 import type {Sbt} from "../../../../Backend/models/sbt"
 import type {Soul} from "../../../../Backend/models/soul"
-import {generateScore} from "$lib/reputation"
-import { attestSBT, getSbtsBySoul, getSoul, hasSoul } from "$lib/sbtfunctions";
+/* import {generateScore} from "$lib/reputation"
+ */import { attestSBT, getSbtsBySoul, getSoul, hasSoul } from "$lib/sbtfunctions";
 import {page} from "$app/stores";
 import Sbtlist from '$lib/Soulspage/Sbtlist.svelte';
 import AttestBox from '$lib/Soulspage/attest-box.svelte';
@@ -38,7 +38,8 @@ let soulExists: boolean;
 let searchedSoul: string;
 let SoulObject: Soul;
 let sbts: Sbt[];
-let score: number
+
+let score: string;
 
     async function getSbts(){
         console.log("Souls sbts are:",await getSbtsBySoul(searchedSoul, $contracts.sbtcontract));
@@ -86,11 +87,23 @@ let score: number
             SoulObject = await $contracts.sbtcontract.methods.getSoul(searchedSoul).call();
             console.log('Soul is', SoulObject);
             sbts = await getSbts()
-            score = await generateScore(searchedSoul, $contracts.sbtcontract)
-             console.log("score is: ", score)
+
         })
 
-        
+        score = await fetch(
+            `/api/+server?searchedSoul=${searchedSoul}&contractInstance=${$contracts.sbtcontract}`,
+            {
+                method: 'GET',
+            },
+        ).then((response) => {
+            if (!response.ok) {
+                throw new Error('Error while fetching Score');
+            }
+            console.log(response.text,"ola")
+            return response.text();
+        });
+        console.log("test: ", score)
+
    /*  return new Promise(resolve => {
         setTimeout(async () => {
         resolve({ hasSoul: await hasSoulFront()  ,  sbt: await showSbts()  });
@@ -101,7 +114,7 @@ let score: number
     return new Promise(resolve => {
         setTimeout(async () => {
         resolve({});
-        }, 3000);
+        }, 1000);
     });
     }
 
