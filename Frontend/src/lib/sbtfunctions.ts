@@ -1,5 +1,5 @@
-import type { Sbt } from '../../../Backend/sbt';
-import type { Soul } from '../../../Backend/soul';
+import type { Sbt } from '../../../Backend/models/sbt';
+import type { Soul } from '../../../Backend/models/soul';
 import { defaultEvmStores as evm, connected, chainId, chainData,  web3,  contracts, selectedAccount } from 'svelte-web3';
 
 /* import SBT_ABI from "../contracts/SBT.json";
@@ -27,7 +27,7 @@ export async function mintSoul(address: string, soulData: Soul, sbt: any): Promi
  *
  * @param address - The wallet addres of the soul
  */
-export async function burnSoul(address: string, sbt: any): Promise<void> {
+export async function burnSoul(address: string, sbt): Promise<void> {
   console.log(`Burning ${address}'s Soul...`);
   await sbt.methods.burn(address).send({ from: address, gasPrice: '20000000000' })
     .catch((error: { data: { message: any; }; }) => {
@@ -143,48 +143,4 @@ async function createNetwork(): Promise<void> {
   await attestSBT('0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266', '0x70997970C51812dc3A010C7d01b50e0d17dc79C8', true, 'Nein DU!');
 
 }
-/**
- *  Simulates an established network of Souls with dedicated SBTs to create personalities
- *
- * @param address - The wallet addres of the soul
- * @param soulData
- */
-async function setProfile(address: string, soulData: Soul): Promise<void> {
-  await sbt.methods.setProfile(address, soulData).send({ from: address, gasPrice: '20000000000' });
 
-}
-
-/**
- *
- * @param profileAddress
- * @param soulAddress  -The wallet addres of the soul
- */
-async function getProfile(profileAddress: string, soulAddress: string): Promise<void> {
-  await sbt.methods.getProfile(profileAddress, soulAddress).call();
-}
-
-/**
- *
- * @param address - The wallet addres of the soul
- */
-async function listProfiles(address: string): Promise<void> {
-  await sbt.methods.listProfiles(address).call();
-}
-
-/**
- *
- * @param profileAddress
- * @param soulAddress - The wallet addres of the soul
- */
-async function hasProfile(profileAddress: string, soulAddress: string): Promise<void> {
-  await sbt.methods.hasProfile(profileAddress, soulAddress).call();
-}
-
-/**
- *
- * @param profileAddress
- * @param soulAddress
- */
-async function removeProfile(profileAddress: string, soulAddress: string): Promise<void> {
-  await sbt.methods.removeProfile(profileAddress, soulAddress).send({ from: soulAddress, gasPrice: '20000000000' });
-}

@@ -22,13 +22,15 @@ import contractAddress from "../../contracts/contract-address.json";
 import type Contract from "web3/eth/contract";
 import type {Sbt} from "../../../../Backend/models/sbt"
 import type {Soul} from "../../../../Backend/models/soul"
+import {generateScore} from "$lib/reputation"
 import { attestSBT, getSbtsBySoul, getSoul, hasSoul } from "$lib/sbtfunctions";
 import {page} from "$app/stores";
 import Sbtlist from '$lib/Soulspage/Sbtlist.svelte';
-    import AttestBox from '$lib/Soulspage/attest-box.svelte';
+import AttestBox from '$lib/Soulspage/attest-box.svelte';
+
+
 evm.attachContract('sbtcontract',contractAddress.SBT, SBT_ABI.abi as AbiItem[])
  
-let sbtcontract: any;
 let reputation: boolean;
 let description = '';
 
@@ -36,6 +38,7 @@ let soulExists: boolean;
 let searchedSoul: string;
 let SoulObject: Soul;
 let sbts: Sbt[];
+let score: number
 
     async function getSbts(){
         console.log("Souls sbts are:",await getSbtsBySoul(searchedSoul, $contracts.sbtcontract));
@@ -45,7 +48,6 @@ let sbts: Sbt[];
     async function attestSBTFront(event: { detail: { reputation: boolean; description: string; }; }) {
         reputation = event.detail.reputation;
         description = event.detail.description; 
-        console.log(description);
         if (description === '') {
             alert("Please fill in a description ");
             return;
@@ -76,18 +78,19 @@ let sbts: Sbt[];
 
         selectedAccount.subscribe(async $selectedAccount => {
         if (!$selectedAccount) return;
-
         console.log('connected to account ', $selectedAccount)
-    })
+        })
 
+        contracts.subscribe(async $contracts => {
+            if (!$contracts.sbtcontract) return;
+            SoulObject = await $contracts.sbtcontract.methods.getSoul(searchedSoul).call();
+            console.log('Soul is', SoulObject);
+            sbts = await getSbts()
+            score = await generateScore(searchedSoul, $contracts.sbtcontract)
+             console.log("score is: ", score)
+        })
 
-    contracts.subscribe(async $contracts => {
-        if (!$contracts.sbtcontract) return;
-        SoulObject = await $contracts.sbtcontract.methods.getSoul(searchedSoul).call();
-        console.log('Soul is', SoulObject);
-        sbts = await getSbts()
-    })
-
+        
    /*  return new Promise(resolve => {
         setTimeout(async () => {
         resolve({ hasSoul: await hasSoulFront()  ,  sbt: await showSbts()  });
@@ -98,7 +101,7 @@ let sbts: Sbt[];
     return new Promise(resolve => {
         setTimeout(async () => {
         resolve({});
-        }, 1000);
+        }, 3000);
     });
     }
 
@@ -115,7 +118,7 @@ let sbts: Sbt[];
   
     <div id="Basic Information" class="border relative flex-col w-1/4 h-5/6">
          <Soulinfo soul={SoulObject}/>
-         <Score soul={SoulObject} searchedSoul={searchedSoul}></Score>
+         <Score score={score} searchedSoul={searchedSoul}></Score>
     </div>
 
     <div id="SbtList"class="w-2/4 h-5/6 border grid gap-2 place-items-center ">

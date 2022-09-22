@@ -1,6 +1,6 @@
 <script lang="ts">
     
-        export let soul: Soul;
+        export let score: number
         export let searchedSoul: string;
 
     </script>
@@ -17,11 +17,12 @@
         <div class="flex flex-row justify-center items-center">
             <div class="flex flex-col justify-center items-center pt-10">
                 <p class="text-2xl text-white">Reputation</p>
-                <p class="text-2xl text-white">{soul.score}</p>
+                <p class="text-2xl text-white">{score}</p>
             </div>
-            <div class ="flex flex-col justify-center items-center pt-10">
+
+           <!--  <div class ="flex flex-col justify-center items-center pt-10">
                 <img src="/img/caution.png" alt="danger" >
-            </div>
+            </div> -->
 
         </div>
     </div>

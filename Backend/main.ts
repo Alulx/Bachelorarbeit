@@ -34,11 +34,15 @@ async function main(): Promise<void> {
   if (!await hasSoul(user1)) {
     await createCircleOfTrust();
   }
-  await attestSBT(user1, user4, true, description);
+  /*   await revokeSBT(3, user4);*/
+  // await mintSoul(user7, {identity: 'test', url: 'test', score: 0, timestamp: 0 });
+  // await attestSBT(user7, user2, true, description);
 
   // console.log(await getSoul(user1));
-  const score = await generateScore(user1, 1);
-  console.log(score);
+
+
+ /*  const score = await generateScore(user1, 1);
+  console.log('Final Score', score); */
 }
 
 /**

@@ -1,13 +1,10 @@
-import { Soul } from './models/soul';
+import type { Soul } from '../../../Backend/models/soul';
 import Web3 from 'web3';
-import { AbiItem } from 'web3-utils';
-import SBT_ABI from '../artifacts/contracts/SBT.sol/SBT.json';
-import { Sbt } from 'models/sbt';
-import  { getSbtCount, getSbtsBySoul, getSoul }  from './main';
-const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+import type { AbiItem } from 'web3-utils';
+import SBT_ABI from '../contracts/SBT.json';
+import type { Sbt } from '../../../Backend/models/sbt';
+import  { getSbtsBySoul, getSoul }  from '$lib/sbtfunctions';
 
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
-const sbt =  new web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress);
 let score = 0;
 
 const SBTCOUNTCAP = 15;
@@ -44,12 +41,13 @@ const SBTCOUNTCAP = 15;
  *
  *
  * @param address - The souls address to be generated a score for
- * @param depth
+ * @param sbt - The Contract instance needed to talk with the smart contract
  */
-export async function generateScore(address: string, depth?: number): Promise<number> {
+export async function generateScore(address: string,  sbt): Promise<number> {
+  
   // Fetching Phase
-  const soul = await getSoul(address);
-  const sbts = await getSbtsBySoul(address);
+  const soul = await getSoul(address, sbt);
+  const sbts = await getSbtsBySoul(address, sbt);
 
   // Calculation Phase
   const soulScore = calculateSoulTimestampScore(soul.timestamp);
