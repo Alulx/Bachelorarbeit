@@ -15,6 +15,7 @@ function changePage(event: { detail: { search: string; } }) {
     let route = event.detail.search;
     window.location.href = "/souls/"+route
 }
+
 /* defaultEvmStores.attachContract('sbtcontract',contractAddress.SBT, SBT_ABI.abi as AbiItem[])
  */
 /**
@@ -61,20 +62,26 @@ user.subscribe(value => {
 
 <div class="navbar bg-primary w-full">
     <p class="btn btn-ghost normal-case text-xl"><a href ='/' >Decentralized Reputation</a></p>
-    
+
     <a href="/about">About</a>
-    <!-- use this instead of user store here-->
-    {#if $connected}
-    <p class="ml-auto">{$selectedAccount}</p>
-    {/if}
+
+    <a class="ml-4" href="/mint">Mint</a>
+
+    <TextInput on:searchEntered={changePage}> </TextInput>
+
     <div class="ml-auto mr-0">
+
+        <!-- use this instead of user store here-->
+        {#if $connected}
+        <p class="ml-auto ">{$selectedAccount}</p>
+        {/if}
         {#if $connected}
         <button  on:click={disconnect} class="btn btn-ghost">Disconnect </button>
         {:else}
         <button  on:click={connect} class="btn btn-ghost">Connect </button>
         {/if}
+      
         
-        <TextInput on:searchEntered={changePage}> </TextInput>
     </div>
     
 </div>

@@ -24,6 +24,6 @@
     }
 
 </script>
-<div class= "w-full ">
+<div class= "w-full justify-center">
     <input on:keyup={manageEnter} bind:value={$soulSearched} type="text" placeholder="Search for Soul..." class="input input-bordered w-full max-w-xs " />
 </div>
