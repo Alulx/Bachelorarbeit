@@ -16,7 +16,7 @@
                 <p class="font-bold "> timestamp: { new Date(Number(s.timestamp * 1000)).toLocaleDateString("en-GB")} </p>
             </div>
         {/each} 
-    
+        
 </div>
 <style>
     .positive{

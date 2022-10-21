@@ -4,7 +4,7 @@ import { createEventDispatcher } from 'svelte';
 const dispatch = createEventDispatcher();
 
 
-let reputation = false;
+let reputation = true;
 let description = '';
 
 function AttestSBTFront() {
@@ -19,25 +19,28 @@ function AttestSBTFront() {
 
 </script>
 
-<div class="pl-1 border  bg-primary w-full h-2/4 ">
-            <p class="text-2xl text-white">
-                Attest an SBT to that Soul here
+<div class="pl-1 border justify-items-center grid bg-primary w-full h-2/4 ">
+            <p class="text-center text-2xl font-bold">
+                Attest an SBT to that Soul here. Uncheck the Checkbox to attest negative reputation.
             </p>
 
-            <label class="text-1xl text-white">
+            <div class="justify-center flex flex-row w-full ">
+                
+                <input
+                    bind:value={description}
+                    type="text"
+                    placeholder="SBT Description"
+                    class="input input-bordered input-accent w-full max-w-xs"
+                />
+
                 <input
                     bind:checked={reputation}
                     type="checkbox"
-                    class="border  input input-bordered input-accent w-full max-w-xs"
+                    class="border  input input-bordered input-accent w-16 "
                 />
-            </label>
 
-            <input
-                bind:value={description}
-                type="text"
-                placeholder="SBT Description"
-                class="mb-5 input input-bordered input-accent w-full max-w-xs"
-            />
+               
+            </div>
             <button
                 on:click={AttestSBTFront}
                 class="w-48 h-12 btn btn-accent fontsize-100 "

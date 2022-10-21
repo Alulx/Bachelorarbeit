@@ -67,7 +67,8 @@ contract SBT {
         require(_tokenId <= tokenId, "Entered TokenId does not exist");
         require(sbts[_tokenId].active == true ,"SBT has already been revoked");
         require(sbts[_tokenId].attester == msg.sender, "Only attester may revoke Token");
-        soulSbtCount[SbtToSoul[_tokenId]]--;
+        //remove this because otherwise getSbtsBySoul() won't put revoked sbts into consideration
+        //soulSbtCount[SbtToSoul[_tokenId]]--;
         sbts[_tokenId].active = false;
 
 /*  Deleting option

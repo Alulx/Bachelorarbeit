@@ -14,6 +14,11 @@ const sbt =  new web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress);
 
 const SBTCOUNTCAP = 10;
 let score = 0;
+let sbtScore;
+let qualityScore;
+let quantityScore;
+
+
 export const GET: RequestHandler = async({ url }) => {
 
   const searchedSoul = String(url.searchParams.get('searchedSoul'));
@@ -63,21 +68,30 @@ export async function generateScore(address: string,  sbt: Contract): Promise<nu
 
   // Fetching Phase
   const soul = await getSoul(address, sbt);
-  const sbts = await getSbtsBySoul(address, sbt);
+  console.log(address);
+  console.log(soul);
+  let sbts = await getSbtsBySoul(address, sbt);
+  sbts = sbts.filter((sbt) => sbt.active && sbt.reputation && sbt.attester !== address);
 
   // Calculation Phase
   const soulScore = calculateSoulTimestampScore(soul.timestamp);
-  const [
-    sbtScore,
-    quantityscore,
-    qualityScore,
-  ] = await calculateSbtScore(sbts, address);
+  if (sbts.length === 0) {
+    quantityScore = 0;
+    qualityScore = 0;
+    sbtScore = 0;
+  } else {
+    [
+      sbtScore,
+      quantityScore,
+      qualityScore,
+    ] = await calculateSbtScore(sbts, address);
+  }
 
   // Output Phase
   score = 0.2 *  soulScore +  0.8 * sbtScore ;
   return [
     score,
-    quantityscore,
+    quantityScore,
     qualityScore,
   ];
 }
@@ -89,21 +103,21 @@ export async function generateScore(address: string,  sbt: Contract): Promise<nu
  */
 function calculateSoulTimestampScore(timestamp: number): number {
   const today = Date.now();
-  /*   console.log('today:', today);
+  console.log('today:', today);
   console.log('today:', new Date(today).toLocaleDateString('en-GB'));
 
   console.log('soul creation:', timestamp );
-  console.log('soul creation:', new Date((timestamp * 1000 )).toLocaleDateString('en-GB'));
- */
-  // Unix timestamps will be considered for Date() Object when it is displayed in miliseconds, hence timestamp * 1000
-  const difference = ((today - timestamp * 1000) / ( 1000 * 3600 * 24 * 365)) ;
+  console.log('soul creation:', new Date( Number(timestamp)).toLocaleDateString('en-GB'));
+
+  // Unix timestamps will be considered for Date() Object when it is displayed in miliseconds, 
+  //this might be changed to timestamp *1000 depending on how you define soul timestamp
+  const difference = ((today - timestamp  ) / ( 1000 * 3600 * 24 * 365)) ;
   console.log('soultimestampscore:', difference);
 
   return difference > 1 ?
     1 :
     difference;
 }
-
 
 
 /**
@@ -114,7 +128,6 @@ function calculateSoulTimestampScore(timestamp: number): number {
  */
 async function calculateSbtScore(sbts: Sbt[], address: string): Promise<number[]> {
   // only consider sbts with active flag true , true reputation and attester != soul
-  sbts = sbts.filter((sbt) => sbt.active && sbt.reputation && sbt.attester !== address);
 
 
   let score = 0;
@@ -185,6 +198,8 @@ function calculateSbtQualityScore(sbts: Sbt[]): number {
   // calculate average timestamp of sbts
   const today = Date.now();
   for (const sbt of Object.values(newestSbts)) {
+    console.log('sbt timestamp:', sbt.timestamp );
+
     const difference = ((today - sbt.timestamp * 1000) / ( 1000 * 3600 * 24 * 365)) ;
     timestampScore += difference;
   }

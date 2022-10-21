@@ -6,6 +6,7 @@ import SBT_ABI from '../artifacts/contracts/SBT.sol/SBT.json';
 import { Sbt } from 'models/sbt';
 import { circleOfTrustSouls } from './networks/circle-of-trust';
 import { generateScore } from './reputation';
+import { richNetworkSouls } from './networks/rich-network';
 const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
 
 const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
@@ -34,6 +35,10 @@ async function main(): Promise<void> {
   if (!await hasSoul(user1)) {
     await createCircleOfTrust();
   }
+  if (!await hasSoul(user4)) {
+    await createRichNetwork();
+  }
+
   /*   await revokeSBT(3, user4);*/
   // await mintSoul(user7, {identity: 'test', url: 'test', score: 0, timestamp: 0 });
   // await attestSBT(user7, user2, true, description);
@@ -41,7 +46,7 @@ async function main(): Promise<void> {
   // console.log(await getSoul(user1));
 
 
- /*  const score = await generateScore(user1, 1);
+  /*  const score = await generateScore(user1, 1);
   console.log('Final Score', score); */
 }
 
@@ -92,7 +97,25 @@ async function  createCircleOfTrust(): Promise<void> {
 }
 
 
+/**
+ *  Function to create a rich Trust Network
+ */
+async function createRichNetwork(): Promise<void> {
+  console.log('Initiating  rich Network of Trust');
+  let index = 3;
+  for (const Soul of richNetworkSouls) {
+    await mintSoul(accounts[index ], Soul);
+    console.log(await getSoul(accounts[index]));
+    index++;
+  }
+  await attestSBT(user4, user5, true, 'A most wonderful friend of mine. Love her with all my might, god bless this person.');
+  await attestSBT(user4, user6, true, 'A very capable trader and fetcher. Sold me an item being sold at much higher prices usually, but gave me a fair deal. Would definitely make business with again.');
+  await attestSBT(user4, user7, true, 'A most wonderful friend of mine. Love her with all my might, god bless this person.');
+  await attestSBT(user4, user8, true, 'Very due diligent. Certified in the use of advanced machine learning algorithms and able to handle loads of stress when it comes to Data Minin. Overall a superb Worker.');
+  await attestSBT(user4, user9, true, 'Attended Devcon in the Year 2021. Accomplished 3 out of 4 possible Modules.');
+  await attestSBT(user4, user10, true, 'Graduated University in 2019 in Computer Science and finished a course on advanced machine learning pattern. GPA: 4.0');
 
+}
 
 
 
