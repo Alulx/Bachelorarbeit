@@ -9,7 +9,7 @@ const dispatch = createEventDispatcher();
 </script> 
 
 
-<div class="border bg-primary text-center justify-center w-full h-2/4  left-10 top-10">
+<div class="bg-gradient-to-r from-primary to-neutral border bg-primary text-center justify-center w-full h-2/4  left-10 top-10">
      <p class="font-bold text-xl pb-2 underline">Basic Information</p>
      <p class="font-bold text-lg pb-2"  > Address: {searchedSoul}</p> 
      <p class="font-bold text-xl pb-2"  > Identity: {soul.identity}</p> 

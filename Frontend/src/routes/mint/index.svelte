@@ -1,13 +1,9 @@
 <script lang="ts">
   import { user } from "$lib/stores";
-  import { onMount } from "svelte";
   import { web3, connected, defaultEvmStores } from "svelte-web3";
   import type { AbiItem } from "web3-utils";
   import SBT_ABI from "../../contracts/SBT.json";
   import contractAddress from "../../contracts/contract-address.json";
-  import type Contract from "web3/eth/contract";
-  import type {Sbt} from "../../../../Backend/sbt"
-  import type {Soul} from "../../../../Backend/soul"
   import { getSoul, hasSoul, mintSoul } from "$lib/sbtfunctions";
   
   let soul = {identity: 'Richard Stallman', url: 'gnu.org', score: Math.floor(Math.random() * 100), timestamp: Date.now() };

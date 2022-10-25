@@ -60,28 +60,35 @@ user.subscribe(value => {
 
 </script>
 
-<div class="navbar bg-primary w-full">
-    <p class="btn btn-ghost normal-case text-xl"><a href ='/' >Decentralized Reputation</a></p>
+<div class="navbar bg-gradient-to-r from-primary via-neutral to-secondary w-full gap-5">
+    <p class="btn btn-ghost normal-case text-xl "><a href ='/' >Decentralized Reputation</a></p>
 
-    <a href="/about">About</a>
+    <a class="btn-ghost" href="/about">About</a>
 
-    <a class="ml-4" href="/mint">Mint</a>
-
+    <a class="ml-4 btn-ghost" href="/mint">Mint</a>
+    
+   
     <TextInput on:searchEntered={changePage}> </TextInput>
+   
 
-    <div class="ml-auto mr-0">
+    <div style="margin-left:auto;" class=" w-auto gap-5">
 
         <!-- use this instead of user store here-->
+<!--         <p class="ml-auto  ">0x0000000000000000000000000000000000000000</p>
+ -->                                      
         {#if $connected}
-        <p class="ml-auto ">{$selectedAccount}</p>
+        <p class="ml-auto btn-ghost "><a href ='/souls/{$selectedAccount}' >{$selectedAccount}</a></p>
+       <!--  {:else}
+        <p class="ml-auto invisible border ">0x0000000000000000000000000000000000000000</p> -->
         {/if}
         {#if $connected}
-        <button  on:click={disconnect} class="btn btn-ghost">Disconnect </button>
+        <button  on:click={disconnect} class="btn btn-ghost normal-case text-xl">Disconnect </button>
         {:else}
-        <button  on:click={connect} class="btn btn-ghost">Connect </button>
+        <button  on:click={connect} class="btn btn-ghost normal-case text-xl">Connect </button>
         {/if}
       
         
     </div>
     
 </div>
+

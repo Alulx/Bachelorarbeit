@@ -19,7 +19,7 @@ function AttestSBTFront() {
 
 </script>
 
-<div class="pl-1 border justify-items-center grid bg-primary w-full h-2/4 ">
+<div class="pl-1 bg-gradient-to-r from-neutral to-secondary border justify-items-center grid bg-primary w-full h-2/4 ">
             <p class="text-center text-2xl font-bold">
                 Attest an SBT to that Soul here. Uncheck the Checkbox to attest negative reputation.
             </p>
