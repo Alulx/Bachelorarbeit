@@ -1,8 +1,5 @@
 <script lang="ts">
 import type { Soul } from "../../../../Backend/models/soul";
-import { createEventDispatcher } from 'svelte';
-const dispatch = createEventDispatcher();
-
 
     export let soul: Soul;
     export let searchedSoul: string;

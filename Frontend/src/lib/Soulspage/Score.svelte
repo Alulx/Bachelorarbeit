@@ -6,7 +6,7 @@
 </script>
 
  
-<div class="border bg-primary bg-gradient-to-r from-primary to-neutral text-center justify-center w-full h-2/4  left-10 top-10">
+<div class="shadow-md shadow-accent border bg-primary bg-gradient-to-r from-primary to-neutral text-center justify-center w-full h-2/4  left-10 top-10">
   <!--   <p class="text-lg font-bold">
         Ratings for {searchedSoul}
     </p> -->

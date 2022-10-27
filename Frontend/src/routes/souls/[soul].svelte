@@ -9,7 +9,7 @@ import Score from '../../lib/Soulspage/Score.svelte';
 import Soulinfo from '$lib/Soulspage/Soulinfo.svelte';
 import PageNotFound from '../../lib/universal/PageNotFound.svelte';
 import {  user } from "$lib/stores";
-import { defaultEvmStores as evm, connected, chainId, chainData,  web3, contracts , selectedAccount } from 'svelte-web3'
+import { defaultEvmStores as evm, connected,  web3, contracts , selectedAccount } from 'svelte-web3'
 import type { AbiItem } from "web3-utils";
 import SBT_ABI from "../../contracts/SBT.json";
 import contractAddress from "../../contracts/contract-address.json";

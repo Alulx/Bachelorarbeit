@@ -36,7 +36,7 @@ export const TERM_PROGRAM_VERSION = "1.72.2";
 export const NVM_BIN = "/home/alex/.nvm/versions/node/v16.9.1/bin";
 
 /** @type {import('$env/static/private').VSCODE_IPC_HOOK_CLI} */
-export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-b73a64a1-e93b-4ae2-a22c-7267761337e7.sock";
+export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-a72cbd95-611b-43eb-853b-94d927a0ac2c.sock";
 
 /** @type {import('$env/static/private').npm_package_json} */
 export const npm_package_json = "/home/alex/Bachelorarbeit/Frontend/package.json";
@@ -99,7 +99,7 @@ export const PATH = "/home/alex/Bachelorarbeit/Frontend/node_modules/.bin:/home/
 export const NODE = "/home/alex/.nvm/versions/node/v16.9.1/bin/node";
 
 /** @type {import('$env/static/private').npm_package_name} */
-export const npm_package_name = "digitalx-mint-factory";
+export const npm_package_name = "DeRep";
 
 /** @type {import('$env/static/private').LANG} */
 export const LANG = "C.UTF-8";

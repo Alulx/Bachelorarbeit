@@ -6,7 +6,7 @@
 </script>
 
 <div id="AffiliatedSouls"
-    class="bg-gradient-to-r from-neutral to-neutral flex-col border overflow-y-auto w-full h-full left-10 top-10">
+    class="shadow-md shadow-accent bg-gradient-to-r from-neutral to-neutral flex-col border overflow-y-auto w-full h-full left-10 top-10">
         {#each sbt as s}
             <div class="{s.reputation ? 'positive bg-gradient-to-r from-neutral to-neutral via-green-700' : 'negative bg-gradient-to-r from-neutral to-neutral via-red-700'} ">
                 <p class="font-bold ">TokenId: {s.tokenId} </p> 

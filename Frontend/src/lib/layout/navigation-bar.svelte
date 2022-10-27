@@ -6,10 +6,7 @@ import ButtonPrimary from "$lib/universal/button-primary.svelte";
 import TextInput from "$lib/universal/TextInput.svelte";
 import { onMount } from "svelte";
 import { web3,connected, defaultEvmStores, selectedAccount } from "svelte-web3";
-import { writable } from "svelte/store";
-import SBT_ABI from "../../contracts/SBT.json";
-import contractAddress from "../../contracts/contract-address.json";
-import type { AbiItem } from "web3-utils/types";
+
 
 function changePage(event: { detail: { search: string; } }) {
     let route = event.detail.search;

@@ -1,9 +1,6 @@
 <script  lang=ts>
-    import { onMount } from 'svelte';
-    import ButtonPrimary from '$lib/universal/button-primary.svelte';
-    import { connected, web3, selectedAccount, chainId, chainData, defaultEvmStores } from 'svelte-web3'
 
-	import { user } from '$lib/stores';
+    import { connected,  chainData,  } from 'svelte-web3'
 
 
 </script>
@@ -45,19 +42,11 @@
     </div> -->
     
     <div style="margin-left:auto;margin-right:auto;" class="hover:from-secondary hover:to-primary hover:via-neutral hover:ring-2 hover:ring-white shadow-md shadow-neutral bg-gradient-to-r from-primary via-neutral to-secondary mt-16 m-5    italic text-center justify-center w-3/6">
-        <p class="font-bold text-2xl  ">
+        <p style="white-space: pre-line" class="font-bold text-2xl  ">
             "The Dao is the hearth and home
-        </p>
-        <p class="font-bold text-2xl  ">
             of the ten thousand things.
-        </p>
-        <p class="font-bold text-2xl  ">
             Good souls treasure it,
-        </p>
-        <p class="font-bold text-2xl  ">
             lost souls find shelter in it."
-        </p>
-        <p class="font-bold text-2xl">
             — Laozi, #62
         </p>
     </div>
