@@ -72,9 +72,7 @@ contract SBT {
         //soulSbtCount[SbtToSoul[_tokenId]]--;
         
          sbts[_tokenId].active =  false;
-        console.log(sbts[_tokenId].attester);
-                console.log(sbts[_tokenId].active);
-        console.log(sbts[_tokenId].explanation_url);
+
 /*  Deleting option
     delete[SbtToSoul[_tokenId]];
         delete sbts[_tokenId];
