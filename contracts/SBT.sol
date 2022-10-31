@@ -67,9 +67,14 @@ contract SBT {
         require(_tokenId <= tokenId, "Entered TokenId does not exist");
         require(sbts[_tokenId].active == true ,"SBT has already been revoked");
         require(sbts[_tokenId].attester == msg.sender, "Only attester may revoke Token");
-        soulSbtCount[SbtToSoul[_tokenId]]--;
-        sbts[_tokenId].active = false;
 
+        //remove this because otherwise getSbtsBySoul() won't put revoked sbts into consideration
+        //soulSbtCount[SbtToSoul[_tokenId]]--;
+        
+         sbts[_tokenId].active =  false;
+        console.log(sbts[_tokenId].attester);
+                console.log(sbts[_tokenId].active);
+        console.log(sbts[_tokenId].explanation_url);
 /*  Deleting option
     delete[SbtToSoul[_tokenId]];
         delete sbts[_tokenId];
@@ -81,7 +86,7 @@ contract SBT {
         Sbt[] memory result = new Sbt[](soulSbtCount[_soul]);
         uint counter = 0;
         for (uint i = 0; i < sbts.length; i++) {
-            if (SbtToSoul[i] == _soul && sbts[i].active == true) {
+            if (SbtToSoul[i] == _soul  ) {
                 result[counter] = sbts[i];
                 counter++;
             }
@@ -120,12 +125,14 @@ contract SBT {
         emit Burn(_soul);
     }
 
-    function update(address _soul, Soul memory _soulData) external {
-        require(msg.sender == _soul, "Only users can update soul data");
-        souls[_soul] = _soulData;
-        emit Update(_soul);
-    }
-
+    // We don't want users to change their identity constantly
+    /*    function update(address _soul, Soul memory _soulData) external {
+            require(msg.sender == _soul, "Only users can update soul data");
+            souls[_soul] = _soulData;
+            emit Update(_soul);
+        }
+    */
+    
     function hasSoul(address _soul) external view returns (bool) {
         if (keccak256(bytes(souls[_soul].identity)) == zeroHash) {
             return false;

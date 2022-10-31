@@ -6,15 +6,13 @@ import ButtonPrimary from "$lib/universal/button-primary.svelte";
 import TextInput from "$lib/universal/TextInput.svelte";
 import { onMount } from "svelte";
 import { web3,connected, defaultEvmStores, selectedAccount } from "svelte-web3";
-import { writable } from "svelte/store";
-import SBT_ABI from "../../contracts/SBT.json";
-import contractAddress from "../../contracts/contract-address.json";
-import type { AbiItem } from "web3-utils/types";
+
 
 function changePage(event: { detail: { search: string; } }) {
     let route = event.detail.search;
     window.location.href = "/souls/"+route
 }
+
 /* defaultEvmStores.attachContract('sbtcontract',contractAddress.SBT, SBT_ABI.abi as AbiItem[])
  */
 /**
@@ -59,22 +57,35 @@ user.subscribe(value => {
 
 </script>
 
-<div class="navbar bg-primary w-full">
-    <p class="btn btn-ghost normal-case text-xl"><a href ='/' >Decentralized Reputation</a></p>
+<div class="navbar bg-gradient-to-r from-primary via-neutral to-secondary w-full gap-5">
+    <p class="btn btn-ghost normal-case text-xl "><a href ='/' >Decentralized Reputation</a></p>
+
+    <a class="btn-ghost" href="/about">About</a>
+
+    <a class="ml-4 btn-ghost" href="/mint">Mint</a>
     
-    <a href="/about">About</a>
-    <!-- use this instead of user store here-->
-    {#if $connected}
-    <p class="ml-auto">{$selectedAccount}</p>
-    {/if}
-    <div class="ml-auto mr-0">
+   
+    <TextInput on:searchEntered={changePage}> </TextInput>
+   
+
+    <div style="margin-left:auto;" class=" w-auto gap-5">
+
+        <!-- use this instead of user store here-->
+<!--         <p class="ml-auto  ">0x0000000000000000000000000000000000000000</p>
+ -->                                      
         {#if $connected}
-        <button  on:click={disconnect} class="btn btn-ghost">Disconnect </button>
-        {:else}
-        <button  on:click={connect} class="btn btn-ghost">Connect </button>
+        <p class="ml-auto btn-ghost "><a href ='/souls/{$selectedAccount}' >{$selectedAccount}</a></p>
+       <!--  {:else}
+        <p class="ml-auto invisible border ">0x0000000000000000000000000000000000000000</p> -->
         {/if}
+        {#if $connected}
+        <button  on:click={disconnect} class="btn btn-ghost normal-case text-xl">Disconnect </button>
+        {:else}
+        <button  on:click={connect} class="btn btn-ghost normal-case text-xl">Connect </button>
+        {/if}
+      
         
-        <TextInput on:searchEntered={changePage}> </TextInput>
     </div>
     
 </div>
+

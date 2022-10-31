@@ -1,5 +1,4 @@
 // File to host different Souls of the personalities
-
 import { Soul } from '../models/soul';
 
 const DevelopmentSoul1: Soul = {

@@ -6,9 +6,9 @@
 </script>
 
 <div id="AffiliatedSouls"
-    class="flex-col border overflow-y-auto w-full h-full left-10 top-10">
+    class="shadow-md shadow-accent bg-gradient-to-r from-neutral to-neutral flex-col border overflow-y-auto w-full h-full left-10 top-10">
         {#each sbt as s}
-            <div class="{s.reputation ? 'positive' : 'negative'}">
+            <div class="{s.reputation ? 'positive bg-gradient-to-r from-neutral to-neutral via-green-700' : 'negative bg-gradient-to-r from-neutral to-neutral via-red-700'} ">
                 <p class="font-bold ">TokenId: {s.tokenId} </p> 
                 <p class="font-bold "> Attested by <a href={s.attester} target="_blank">{s.attester}</a> </p> 
                 <p class="font-bold "> Description: {s.explanation_url} </p>
@@ -16,7 +16,7 @@
                 <p class="font-bold "> timestamp: { new Date(Number(s.timestamp * 1000)).toLocaleDateString("en-GB")} </p>
             </div>
         {/each} 
-    
+        
 </div>
 <style>
     .positive{
@@ -26,6 +26,8 @@
         flex-direction: row;
         margin: 0.25rem;
         background-color: rgb(209 250 229);
+        padding: 3px;
+
     }
 
     .negative{
@@ -35,6 +37,8 @@
         flex-direction: row;
         margin: 0.25rem;
         background-color: rgb(251 207 232);
+        padding: 3px;
+
     }
 
 

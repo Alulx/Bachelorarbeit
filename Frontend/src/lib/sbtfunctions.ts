@@ -12,7 +12,7 @@ evm.attachContract('sbtcontract', contractAddress.SBT, SBT_ABI.abi as AbiItem[])
  *  Mints a new Soul of the specified user
  *
  * @param address - The wallet addres of the soul
- * @param soulData - The Data of the specified sOul
+ * @param soulData - The Data of the specified soul
  */
 export async function mintSoul(address: string, soulData: Soul, sbt: any): Promise<void> {
   console.log(`Minting Soul for  ${address}`);

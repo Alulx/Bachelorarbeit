@@ -24,6 +24,7 @@
     }
 
 </script>
-<div class= "w-full ">
-    <input on:keyup={manageEnter} bind:value={$soulSearched} type="text" placeholder="Search for Soul..." class="input input-bordered w-full max-w-xs " />
+
+<div style="left:42%" class= "absolute  w-80">
+    <input on:keyup={manageEnter} bind:value={$soulSearched} type="text" placeholder="Search for Soul..." class="input input-bordered  input-accent w-full max-w-xs" />
 </div>
