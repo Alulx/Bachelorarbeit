@@ -36,7 +36,7 @@ export const TERM_PROGRAM_VERSION = "1.72.2";
 export const NVM_BIN = "/home/alex/.nvm/versions/node/v16.9.1/bin";
 
 /** @type {import('$env/static/private').VSCODE_IPC_HOOK_CLI} */
-export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-a72cbd95-611b-43eb-853b-94d927a0ac2c.sock";
+export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-c38b98bd-6be3-4832-a01f-e7e88857f138.sock";
 
 /** @type {import('$env/static/private').npm_package_json} */
 export const npm_package_json = "/home/alex/Bachelorarbeit/Frontend/package.json";

@@ -96,8 +96,8 @@ describe('SBT', function () {
 
   });
 
-  it('user2 should have 1 sbt now', async function() {
-    expect(await sbt.soulSbtCount(user2.address)).to.equal(1);
+  it('user2 should have 2 sbt still, but one should be false', async function() {
+    expect(await sbt.soulSbtCount(user2.address)).to.equal(2);
   });
 
   it('Should display active:false ' , async function() {
@@ -106,7 +106,7 @@ describe('SBT', function () {
   });
 
   it('Should return a list of tokens owned by user2' , async function() {
-    //console.log(await sbt.getSbtsBySoul(user2.address));
+    console.log(await sbt.getSbtsBySoul(user2.address));
   });
 
   it('Foreign User should not be able to delete data', async function () {
