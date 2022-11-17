@@ -3,7 +3,7 @@ import Web3 from 'web3';
 import type { AbiItem } from 'web3-utils';
 import SBT_ABI from '../contracts/SBT.json';
 import type { Sbt } from '../../../Backend/models/sbt';
-import  { getSbtsBySoul, getSoul, getSoul }  from '$lib/sbtfunctions';
+import  { getSbtsBySoul, getSoul }  from '$lib/sbtfunctions';
 
 let score = 0;
 
