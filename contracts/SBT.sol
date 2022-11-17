@@ -1,4 +1,3 @@
-// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 import "hardhat/console.sol";
 /**
@@ -6,18 +5,15 @@ import "hardhat/console.sol";
  * co-authored whitepaper at:
  * https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4105763
  *
- * I propose for a rename to Non-Transferable Tokens NTT's
  */
 
 contract SBT {
 
     struct Soul {
         string identity;
-        // add issuer specific fields below
         string url;
         uint256 score;
         uint256 timestamp;
-
     }
 
     struct Sbt {

@@ -9,7 +9,7 @@ export const USER = "alex";
 export const npm_config_user_agent = "npm/7.21.1 node/v16.9.1 linux x64 workspaces/false";
 
 /** @type {import('$env/static/private').GIT_ASKPASS} */
-export const GIT_ASKPASS = "/home/alex/.vscode-server/bin/d045a5eda657f4d7b676dedbfa7aab8207f8a075/extensions/git/dist/askpass.sh";
+export const GIT_ASKPASS = "/home/alex/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/extensions/git/dist/askpass.sh";
 
 /** @type {import('$env/static/private').npm_node_execpath} */
 export const npm_node_execpath = "/home/alex/.nvm/versions/node/v16.9.1/bin/node";
@@ -30,22 +30,22 @@ export const HOME = "/home/alex";
 export const OLDPWD = "/home/alex/Bachelorarbeit/Backend";
 
 /** @type {import('$env/static/private').TERM_PROGRAM_VERSION} */
-export const TERM_PROGRAM_VERSION = "1.72.2";
+export const TERM_PROGRAM_VERSION = "1.73.0";
 
 /** @type {import('$env/static/private').NVM_BIN} */
 export const NVM_BIN = "/home/alex/.nvm/versions/node/v16.9.1/bin";
 
 /** @type {import('$env/static/private').VSCODE_IPC_HOOK_CLI} */
-export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-c38b98bd-6be3-4832-a01f-e7e88857f138.sock";
+export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-dc976fe7-1da5-4a58-b4ba-bcc5bfbb2ac6.sock";
 
 /** @type {import('$env/static/private').npm_package_json} */
 export const npm_package_json = "/home/alex/Bachelorarbeit/Frontend/package.json";
 
 /** @type {import('$env/static/private').VSCODE_GIT_ASKPASS_MAIN} */
-export const VSCODE_GIT_ASKPASS_MAIN = "/home/alex/.vscode-server/bin/d045a5eda657f4d7b676dedbfa7aab8207f8a075/extensions/git/dist/askpass-main.js";
+export const VSCODE_GIT_ASKPASS_MAIN = "/home/alex/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/extensions/git/dist/askpass-main.js";
 
 /** @type {import('$env/static/private').VSCODE_GIT_ASKPASS_NODE} */
-export const VSCODE_GIT_ASKPASS_NODE = "/home/alex/.vscode-server/bin/d045a5eda657f4d7b676dedbfa7aab8207f8a075/node";
+export const VSCODE_GIT_ASKPASS_NODE = "/home/alex/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/node";
 
 /** @type {import('$env/static/private').npm_config_userconfig} */
 export const npm_config_userconfig = "/home/alex/.npmrc";
@@ -75,7 +75,7 @@ export const LOGNAME = "alex";
 export const NAME = "DESKTOP-NBN8EKQ";
 
 /** @type {import('$env/static/private').WSL_INTEROP} */
-export const WSL_INTEROP = "/run/WSL/13_interop";
+export const WSL_INTEROP = "/run/WSL/14_interop";
 
 /** @type {import('$env/static/private')._} */
 export const _ = "/home/alex/.nvm/versions/node/v16.9.1/bin/npm";
@@ -93,7 +93,7 @@ export const npm_config_cache = "/home/alex/.npm";
 export const npm_config_node_gyp = "/home/alex/.nvm/versions/node/v16.9.1/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js";
 
 /** @type {import('$env/static/private').PATH} */
-export const PATH = "/home/alex/Bachelorarbeit/Frontend/node_modules/.bin:/home/alex/Bachelorarbeit/node_modules/.bin:/home/alex/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/home/alex/.nvm/versions/node/v16.9.1/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/alex/.vscode-server/bin/d045a5eda657f4d7b676dedbfa7aab8207f8a075/bin/remote-cli:/home/alex/.nvm/versions/node/v16.9.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Users/Alex/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Alex/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Alex/AppData/Local/Programs/MiKTeX/miktex/bin/x64/:/snap/bin";
+export const PATH = "/home/alex/Bachelorarbeit/Frontend/node_modules/.bin:/home/alex/Bachelorarbeit/node_modules/.bin:/home/alex/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/home/alex/.nvm/versions/node/v16.9.1/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/alex/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/bin/remote-cli:/home/alex/.nvm/versions/node/v16.9.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Users/Alex/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Alex/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Alex/AppData/Local/Programs/MiKTeX/miktex/bin/x64/:/snap/bin";
 
 /** @type {import('$env/static/private').NODE} */
 export const NODE = "/home/alex/.nvm/versions/node/v16.9.1/bin/node";
@@ -156,7 +156,7 @@ export const npm_command = "run-script";
 export const HOSTTYPE = "x86_64";
 
 /** @type {import('$env/static/private').WSLENV} */
-export const WSLENV = "VSCODE_WSL_EXT_LOCATION/up";
+export const WSLENV = "VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up";
 
 /** @type {import('$env/static/private').INIT_CWD} */
 export const INIT_CWD = "/home/alex/Bachelorarbeit/Frontend";

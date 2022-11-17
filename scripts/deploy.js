@@ -23,6 +23,17 @@ async function main() {
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
   const SBT = await ethers.getContractFactory("SBT");
+
+  //get value of eth gas price
+  const gasPrice = await ethers.provider.getGasPrice();
+  console.log("Gas price:", gasPrice.toString());
+  
+  
+  const estimatedGas = await SBT.signer.estimateGas(
+    SBT.getDeployTransaction()
+   );
+   console.log(`Estimated gas: ${estimatedGas}`);
+
   const sbt = await SBT.deploy();
   await sbt.deployed();
 
