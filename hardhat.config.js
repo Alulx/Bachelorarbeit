@@ -12,7 +12,6 @@ module.exports = {
       { version: "0.6.6" }
     ]
   },
-  defaultNetwork: "goerli",
   networks: {
     hardhat: {
       chainId: 1337 // We set 1337 to make interacting with MetaMask simpler
