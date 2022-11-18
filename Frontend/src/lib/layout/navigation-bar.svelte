@@ -38,11 +38,12 @@ onMount(async () => {
 		if (localStorage?.getItem('isWalletConnected') === 'true'){
             try{
                 console.log("Reconnecting...")
-                await defaultEvmStores.setProvider();
+                await defaultEvmStores.setProvider() 
                 let address = await $web3.eth.getAccounts();
                 user.set(address[0]);
 
                 localStorage.setItem('isWalletConnected', "true");
+                console.log("Connected")
             } catch (ex){
                 console.log(ex);
             }

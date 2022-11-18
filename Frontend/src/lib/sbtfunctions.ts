@@ -16,7 +16,7 @@ evm.attachContract('sbtcontract', contractAddress.SBT, SBT_ABI.abi as AbiItem[])
  */
 export async function mintSoul(address: string, soulData: Soul, sbt: any): Promise<void> {
   console.log(`Minting Soul for  ${address}`);
-  await sbt.methods.mint(address, soulData).send({ from: address, gasPrice: '20000000000' }).
+  await sbt.methods.mint(address, soulData).send({ from: address }).
     catch((error: { data: { message: any; }; }) => {
       console.error(error.data.message);
     });
@@ -29,7 +29,7 @@ export async function mintSoul(address: string, soulData: Soul, sbt: any): Promi
  */
 export async function burnSoul(address: string, sbt): Promise<void> {
   console.log(`Burning ${address}'s Soul...`);
-  await sbt.methods.burn(address).send({ from: address, gasPrice: '20000000000' })
+  await sbt.methods.burn(address).send({ from: address })
     .catch((error: { data: { message: any; }; }) => {
       console.error(error.data.message);
     });
@@ -52,7 +52,7 @@ export async function hasSoul(address: string, sbt): Promise<boolean> {
  * @param soulData - The data to be changed about the soul
  */
 export async function updateSoul(address: string, soulData: Soul, sbt): Promise<void> {
-  await sbt.methods.update(address, soulData).send({ from: address, gasPrice: '20000000000' })
+  await sbt.methods.update(address, soulData).send({ from: address })
     .catch((error) => {
       console.error(error.data.message);
     });
@@ -82,7 +82,7 @@ export async function attestSBT(
   explanation_url: string,
   sbt,
 ): Promise<void> {
-  await sbt.methods.attest(target_address, reputation, explanation_url).send({ from: attester_address, gasPrice: '20000000000' })
+  await sbt.methods.attest(target_address, reputation, explanation_url).send({ from: attester_address })
     .catch((error) => {
       console.error(`Something went wrong:${error.data.message}`);
     });
@@ -95,7 +95,7 @@ export async function attestSBT(
  * @param attester_address - The addrs of the attester
  */
 export async function revokeSBT(tokenId: number, attester_address: string, sbt): Promise<void> {
-  await sbt.methods.revoke(tokenId).send({ from: attester_address, gasPrice: '20000000000' })
+  await sbt.methods.revoke(tokenId).send({ from: attester_address })
     .catch((error) => {
       console.error(error.data.message);
     });

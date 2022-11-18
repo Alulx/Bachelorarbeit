@@ -42,8 +42,7 @@
 
     let data = getData();
 
-async function getData() {   
-
+async function getData() {  
     connected.subscribe(async value => {
             if (!value) return
             soulExists = await $contracts.sbtcontract.methods.hasSoul($selectedAccount).call();
@@ -52,7 +51,9 @@ async function getData() {
     
     contracts.subscribe(async $contracts => {
         if (!$contracts.sbtcontract) return;
-        SoulObject = await $contracts.sbtcontract.methods.getSoul($selectedAccount).call();
+            SoulObject = await $contracts.sbtcontract.methods.getSoul($selectedAccount).call();
+            console.log('SoulObject:', SoulObject);
+        
     })
        // Just an empty promise to make svelte wait for the data to be loaded
        return new Promise(resolve => {

@@ -7,9 +7,10 @@ import Web3 from 'web3';
 import type { AbiItem } from 'web3-utils';
 import SBT_ABI from '../../contracts/SBT.json';
 import type { Contract } from 'web3-eth-contract';
-const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';
+const contractAddress = '0x7D440eC3C62Dd19a7b79c4C802DA79d00E7260DA';
 
-const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'));
+
+const web3 = new Web3(new Web3.providers.HttpProvider('https://eth-goerli.g.alchemy.com/v2/sQe5qRTTlyh-6FjoWyy8rXX1hsC3bWJ8'));
 const sbt =  new web3.eth.Contract(SBT_ABI.abi as AbiItem[], contractAddress);
 
 const SBTCOUNTCAP = 10;

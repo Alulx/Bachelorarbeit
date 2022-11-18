@@ -39,6 +39,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"dotenv": "^16.0.3",
 		"svelte-web3": "^4.0.0-2"
 	}
 }

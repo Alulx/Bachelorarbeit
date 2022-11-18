@@ -47,6 +47,10 @@ let score: string;
             alert("Please fill in a description ");
             return;
         }
+        if (!await $contracts.sbtcontract.methods.hasSoul($selectedAccount).call()) {
+            alert("You need a soul to attest");
+            return;
+        }
         await attestSBT(searchedSoul, $user, reputation, description, $contracts.sbtcontract);
     }
 
