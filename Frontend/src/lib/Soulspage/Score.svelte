@@ -1,7 +1,6 @@
 <script lang="ts">
     
         export let score: string
-        export let searchedSoul: string;
         const reputation = score.split(',');
 </script>
 
@@ -38,18 +37,26 @@
         </div>
 
         {#if Number(reputation[0]) < 0.6 && Number(reputation[0]) > 0.2}
-        <div class="flex flex-row justify-center items-center pt-5">
-            <img class=""src="/img/caution.png" alt="danger" width="150"  >
+        <div class="flex flex-row justify-center items-center pt-3 ">
+            <img class=""src="/img/caution.png" alt="danger" width="146"  >
         </div>
         {:else if Number(reputation[0]) <= 0.2}
-        <div class="flex flex-row justify-center items-center pt-5">
-            <img class=" "src="/img/RedDanger.png" alt="danger" width="150"  >
+        <div class="flex flex-row justify-center items-center pt-4">
+            <img class=""src="/img/RedDanger.png" alt="danger" width="140"  >
         </div>
         {:else}
-        <div class="flex flex-row justify-center items-center pt-5">
-            <img class=""src="/img/GreenCheck.png" alt="danger" width="100"  >
+        <div class="flex flex-row justify-center items-center pt-5" >
+            <img class=""src="/img/GreenCheck.png" alt="danger" width="110"  >
         </div>
         {/if}
+
+        {#if Number(reputation[3]) == 1 } 
+        <div class="flex flex-row justify- items-center pt-1">
+            <div class="flex flex-col justify-center items-center ">
+                <p class="text-xl font-bold">Warning: More than 50% of SBTs are negative. Caution advised.</p>
+            </div>
+        </div>
+        {/if} 
 
 
 

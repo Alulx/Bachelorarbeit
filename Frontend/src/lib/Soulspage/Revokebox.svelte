@@ -16,7 +16,7 @@ function revokeSBTFront() {
 
 </script>
 
-<div class="shadow-md shadow-accent bg-gradient-to-r from-neutral to-secondary p-1 border justify-items-center grid bg-primary w-full h-2/4 ">
+<div class="shadow-md shadow-accent bg-gradient-to-r from-neutral to-secondary pt-5  p-1 border justify-items-center grid bg-primary w-full h-2/4 ">
             <p class=" text-center text-2xl font-bold">
                 Revoke an SBT that you previously attested to this Soul here.
             </p>

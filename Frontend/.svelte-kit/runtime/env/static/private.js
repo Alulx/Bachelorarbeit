@@ -9,7 +9,7 @@ export const USER = "alex";
 export const npm_config_user_agent = "npm/7.21.1 node/v16.9.1 linux x64 workspaces/false";
 
 /** @type {import('$env/static/private').GIT_ASKPASS} */
-export const GIT_ASKPASS = "/home/alex/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/extensions/git/dist/askpass.sh";
+export const GIT_ASKPASS = "/home/alex/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/extensions/git/dist/askpass.sh";
 
 /** @type {import('$env/static/private').npm_node_execpath} */
 export const npm_node_execpath = "/home/alex/.nvm/versions/node/v16.9.1/bin/node";
@@ -36,16 +36,16 @@ export const TERM_PROGRAM_VERSION = "1.73.1";
 export const NVM_BIN = "/home/alex/.nvm/versions/node/v16.9.1/bin";
 
 /** @type {import('$env/static/private').VSCODE_IPC_HOOK_CLI} */
-export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-ff3514b8-7d8c-4dc4-a825-124ed91f3603.sock";
+export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-c2ab53c4-2b44-49b6-b9b3-3fe036fbeca3.sock";
 
 /** @type {import('$env/static/private').npm_package_json} */
 export const npm_package_json = "/home/alex/Bachelorarbeit/Frontend/package.json";
 
 /** @type {import('$env/static/private').VSCODE_GIT_ASKPASS_MAIN} */
-export const VSCODE_GIT_ASKPASS_MAIN = "/home/alex/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/extensions/git/dist/askpass-main.js";
+export const VSCODE_GIT_ASKPASS_MAIN = "/home/alex/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/extensions/git/dist/askpass-main.js";
 
 /** @type {import('$env/static/private').VSCODE_GIT_ASKPASS_NODE} */
-export const VSCODE_GIT_ASKPASS_NODE = "/home/alex/.vscode-server/bin/8fa188b2b301d36553cbc9ce1b0a146ccb93351f/node";
+export const VSCODE_GIT_ASKPASS_NODE = "/home/alex/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/node";
 
 /** @type {import('$env/static/private').npm_config_userconfig} */
 export const npm_config_userconfig = "/home/alex/.npmrc";
@@ -75,7 +75,7 @@ export const LOGNAME = "alex";
 export const NAME = "DESKTOP-NBN8EKQ";
 
 /** @type {import('$env/static/private').WSL_INTEROP} */
-export const WSL_INTEROP = "/run/WSL/14_interop";
+export const WSL_INTEROP = "/run/WSL/13_interop";
 
 /** @type {import('$env/static/private')._} */
 export const _ = "/home/alex/.nvm/versions/node/v16.9.1/bin/npm";
@@ -156,7 +156,7 @@ export const npm_command = "run-script";
 export const HOSTTYPE = "x86_64";
 
 /** @type {import('$env/static/private').WSLENV} */
-export const WSLENV = "VSCODE_WSL_EXT_LOCATION/up:VSCODE_SERVER_TAR/up";
+export const WSLENV = "VSCODE_WSL_EXT_LOCATION/up";
 
 /** @type {import('$env/static/private').INIT_CWD} */
 export const INIT_CWD = "/home/alex/Bachelorarbeit/Frontend";

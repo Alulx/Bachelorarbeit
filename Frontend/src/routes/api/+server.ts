@@ -18,7 +18,7 @@ let score = 0;
 let sbtScore;
 let qualityScore;
 let quantityScore;
-
+let fraudScore; // fraudscore =1 means more than 50% of the sbts are negative
 
 export const GET: RequestHandler = async({ url }) => {
 
@@ -72,6 +72,13 @@ export async function generateScore(address: string,  sbt: Contract): Promise<nu
   console.log(address);
   console.log(soul);
   let sbts = await getSbtsBySoul(address, sbt);
+  // check if more than 50% of sbts have reputation flag false
+  fraudScore = sbts.filter((sbt) => sbt.reputation === false).length / sbts.length > 0.5 ?
+    1 :
+    0;
+
+
+  // Filter out inactive sbts, sbts with negative reputation and sbts from the same soul
   sbts = sbts.filter((sbt) => sbt.active && sbt.reputation && sbt.attester !== address);
 
   // Calculation Phase
@@ -94,6 +101,7 @@ export async function generateScore(address: string,  sbt: Contract): Promise<nu
     score,
     quantityScore,
     qualityScore,
+    fraudScore,
   ];
 }
 
@@ -110,8 +118,8 @@ function calculateSoulTimestampScore(timestamp: number): number {
   console.log('soul creation:', timestamp );
   console.log('soul creation:', new Date( Number(timestamp)).toLocaleDateString('en-GB'));
 
-  // Unix timestamps will be considered for Date() Object when it is displayed in miliseconds, 
-  //this might be changed to timestamp *1000 depending on how you define soul timestamp
+  // Unix timestamps will be considered for Date() Object when it is displayed in miliseconds,
+  // this might be changed to timestamp *1000 depending on how you define soul timestamp
   const difference = ((today - timestamp  ) / ( 1000 * 3600 * 24 * 365)) ;
   console.log('soultimestampscore:', difference);
 
