@@ -17,3 +17,4 @@
 
 5. node main.js -  Go to the Backend and run main.js to generate an example Network of Users
 
+# If you're on goerli branch all you need is npm run dev
