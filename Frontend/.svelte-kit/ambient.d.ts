@@ -21,6 +21,7 @@ declare module '$env/static/private' {
 	export const VSCODE_GIT_ASKPASS_MAIN: string;
 	export const VSCODE_GIT_ASKPASS_NODE: string;
 	export const npm_config_userconfig: string;
+	export const npm_config_local_prefix: string;
 	export const npm_config_engine_strict: string;
 	export const COLORTERM: string;
 	export const WSL_DISTRO_NAME: string;
@@ -54,6 +55,7 @@ declare module '$env/static/private' {
 	export const npm_execpath: string;
 	export const NVM_CD_FLAGS: string;
 	export const XDG_DATA_DIRS: string;
+	export const npm_config_global_prefix: string;
 	export const npm_command: string;
 	export const HOSTTYPE: string;
 	export const WSLENV: string;

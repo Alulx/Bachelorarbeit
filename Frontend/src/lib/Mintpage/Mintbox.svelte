@@ -6,7 +6,7 @@
   import contractAddress from "../../contracts/contract-address.json";
   import { hasSoul, mintSoul } from "$lib/sbtfunctions";
   import type {Soul} from "../../../../Backend/models/soul"
-import {page} from "$app/stores";
+  import {page} from "$app/stores";
 
 
   let sbtcontract: any;

@@ -11,7 +11,7 @@ describe('SBT', function () {
 
 
   it('hasSoul should return false for new query', async function () {
-    expect(await sbt.hasSoul(user1.address)).to.equal(false);
+    expect(await sbt.hasSoul(user1.address)).to.fequal(false);
   });
 
   it('Should mint a new soul', async function () {

@@ -1,8 +1,7 @@
 <script  lang=ts>
 
     import { connected,  chainData,  } from 'svelte-web3'
-
-
+    
 </script>
 
 
@@ -10,7 +9,7 @@
  
 
 
-    <div class=" m-5">
+    <div class="m-5">
        
         {#if !$connected}
 

@@ -1,22 +1,5 @@
 <script lang="ts">
-    import Minthint from '../../lib/Mintpage/Minthint.svelte';
-  
-    import Soulinfo from '../../lib/Mintpage/Soulinfo.svelte';
-  
-    import Header from '../../lib/universal/Header.svelte';
-  
-    import Mintbox from '../../lib/Mintpage/Mintbox.svelte';
-  
-    import { user } from "$lib/stores";
-    import { defaultEvmStores as evm, connected,  web3, contracts , selectedAccount } from 'svelte-web3'
-    import type { AbiItem } from "web3-utils";
-    import SBT_ABI from "../../contracts/SBT.json";
-    import contractAddress from "../../contracts/contract-address.json";
-    import { hasSoul, mintSoul } from "$lib/sbtfunctions";
-    import type {Soul} from "../../../../Backend/models/soul"
-      import {page} from "$app/stores";
-  
-   
+
     
   </script>
   
