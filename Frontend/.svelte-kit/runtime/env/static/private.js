@@ -6,13 +6,13 @@ export const LESSOPEN = "| /usr/bin/lesspipe %s";
 export const USER = "alex";
 
 /** @type {import('$env/static/private').npm_config_user_agent} */
-export const npm_config_user_agent = "npm/7.21.1 node/v16.9.1 linux x64 workspaces/false";
+export const npm_config_user_agent = "npm/9.6.6 node/v18.16.0 linux x64 workspaces/false";
 
 /** @type {import('$env/static/private').GIT_ASKPASS} */
-export const GIT_ASKPASS = "/home/alex/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/extensions/git/dist/askpass.sh";
+export const GIT_ASKPASS = "/home/alex/.vscode-server/bin/695af097c7bd098fbf017ce3ac85e09bbc5dda06/extensions/git/dist/askpass.sh";
 
 /** @type {import('$env/static/private').npm_node_execpath} */
-export const npm_node_execpath = "/home/alex/.nvm/versions/node/v16.9.1/bin/node";
+export const npm_node_execpath = "/home/alex/.nvm/versions/node/v18.16.0/bin/node";
 
 /** @type {import('$env/static/private').SHLVL} */
 export const SHLVL = "1";
@@ -30,25 +30,28 @@ export const HOME = "/home/alex";
 export const OLDPWD = "/home/alex/Bachelorarbeit";
 
 /** @type {import('$env/static/private').TERM_PROGRAM_VERSION} */
-export const TERM_PROGRAM_VERSION = "1.73.1";
+export const TERM_PROGRAM_VERSION = "1.79.2";
 
 /** @type {import('$env/static/private').NVM_BIN} */
-export const NVM_BIN = "/home/alex/.nvm/versions/node/v16.9.1/bin";
+export const NVM_BIN = "/home/alex/.nvm/versions/node/v18.16.0/bin";
 
 /** @type {import('$env/static/private').VSCODE_IPC_HOOK_CLI} */
-export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-c2ab53c4-2b44-49b6-b9b3-3fe036fbeca3.sock";
+export const VSCODE_IPC_HOOK_CLI = "/tmp/vscode-ipc-00611b45-67b2-475a-8b5d-d2f928e997ed.sock";
 
 /** @type {import('$env/static/private').npm_package_json} */
 export const npm_package_json = "/home/alex/Bachelorarbeit/Frontend/package.json";
 
 /** @type {import('$env/static/private').VSCODE_GIT_ASKPASS_MAIN} */
-export const VSCODE_GIT_ASKPASS_MAIN = "/home/alex/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/extensions/git/dist/askpass-main.js";
+export const VSCODE_GIT_ASKPASS_MAIN = "/home/alex/.vscode-server/bin/695af097c7bd098fbf017ce3ac85e09bbc5dda06/extensions/git/dist/askpass-main.js";
 
 /** @type {import('$env/static/private').VSCODE_GIT_ASKPASS_NODE} */
-export const VSCODE_GIT_ASKPASS_NODE = "/home/alex/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/node";
+export const VSCODE_GIT_ASKPASS_NODE = "/home/alex/.vscode-server/bin/695af097c7bd098fbf017ce3ac85e09bbc5dda06/node";
 
 /** @type {import('$env/static/private').npm_config_userconfig} */
 export const npm_config_userconfig = "/home/alex/.npmrc";
+
+/** @type {import('$env/static/private').npm_config_local_prefix} */
+export const npm_config_local_prefix = "/home/alex/Bachelorarbeit/Frontend";
 
 /** @type {import('$env/static/private').npm_config_engine_strict} */
 export const npm_config_engine_strict = "true";
@@ -75,13 +78,13 @@ export const LOGNAME = "alex";
 export const NAME = "DESKTOP-NBN8EKQ";
 
 /** @type {import('$env/static/private').WSL_INTEROP} */
-export const WSL_INTEROP = "/run/WSL/13_interop";
+export const WSL_INTEROP = "/run/WSL/14_interop";
 
 /** @type {import('$env/static/private')._} */
-export const _ = "/home/alex/.nvm/versions/node/v16.9.1/bin/npm";
+export const _ = "/home/alex/.nvm/versions/node/v18.16.0/bin/npm";
 
 /** @type {import('$env/static/private').npm_config_prefix} */
-export const npm_config_prefix = "/home/alex/.nvm/versions/node/v16.9.1";
+export const npm_config_prefix = "/home/alex/.nvm/versions/node/v18.16.0";
 
 /** @type {import('$env/static/private').TERM} */
 export const TERM = "xterm-256color";
@@ -90,13 +93,13 @@ export const TERM = "xterm-256color";
 export const npm_config_cache = "/home/alex/.npm";
 
 /** @type {import('$env/static/private').npm_config_node_gyp} */
-export const npm_config_node_gyp = "/home/alex/.nvm/versions/node/v16.9.1/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js";
+export const npm_config_node_gyp = "/home/alex/.nvm/versions/node/v18.16.0/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js";
 
 /** @type {import('$env/static/private').PATH} */
-export const PATH = "/home/alex/Bachelorarbeit/Frontend/node_modules/.bin:/home/alex/Bachelorarbeit/node_modules/.bin:/home/alex/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/home/alex/.nvm/versions/node/v16.9.1/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/alex/.vscode-server/bin/6261075646f055b99068d3688932416f2346dd3b/bin/remote-cli:/home/alex/.nvm/versions/node/v16.9.1/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Users/Alex/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Alex/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Alex/AppData/Local/Programs/MiKTeX/miktex/bin/x64/:/snap/bin";
+export const PATH = "/home/alex/Bachelorarbeit/Frontend/node_modules/.bin:/home/alex/Bachelorarbeit/node_modules/.bin:/home/alex/node_modules/.bin:/home/node_modules/.bin:/node_modules/.bin:/home/alex/.nvm/versions/node/v18.16.0/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/home/alex/.vscode-server/bin/695af097c7bd098fbf017ce3ac85e09bbc5dda06/bin/remote-cli:/home/alex/.nvm/versions/node/v18.16.0/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Program Files/Eclipse Adoptium/jdk-17.0.7.7-hotspot/bin:/mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Zerynth/ztc/windows64:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Users/Alex/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/Alex/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Users/Alex/AppData/Local/Programs/MiKTeX/miktex/bin/x64/:/mnt/c/Users/Alex/zerynth3/dist/sys/cli:/snap/bin";
 
 /** @type {import('$env/static/private').NODE} */
-export const NODE = "/home/alex/.nvm/versions/node/v16.9.1/bin/node";
+export const NODE = "/home/alex/.nvm/versions/node/v18.16.0/bin/node";
 
 /** @type {import('$env/static/private').npm_package_name} */
 export const npm_package_name = "DeRep";
@@ -132,7 +135,7 @@ export const LESSCLOSE = "/usr/bin/lesspipe %s %s";
 export const VSCODE_GIT_ASKPASS_EXTRA_ARGS = "";
 
 /** @type {import('$env/static/private').npm_config_globalconfig} */
-export const npm_config_globalconfig = "/home/alex/.nvm/versions/node/v16.9.1/etc/npmrc";
+export const npm_config_globalconfig = "/home/alex/.nvm/versions/node/v18.16.0/etc/npmrc";
 
 /** @type {import('$env/static/private').npm_config_init_module} */
 export const npm_config_init_module = "/home/alex/.npm-init.js";
@@ -141,13 +144,16 @@ export const npm_config_init_module = "/home/alex/.npm-init.js";
 export const PWD = "/home/alex/Bachelorarbeit/Frontend";
 
 /** @type {import('$env/static/private').npm_execpath} */
-export const npm_execpath = "/home/alex/.nvm/versions/node/v16.9.1/lib/node_modules/npm/bin/npm-cli.js";
+export const npm_execpath = "/home/alex/.nvm/versions/node/v18.16.0/lib/node_modules/npm/bin/npm-cli.js";
 
 /** @type {import('$env/static/private').NVM_CD_FLAGS} */
 export const NVM_CD_FLAGS = "";
 
 /** @type {import('$env/static/private').XDG_DATA_DIRS} */
 export const XDG_DATA_DIRS = "/usr/local/share:/usr/share:/var/lib/snapd/desktop";
+
+/** @type {import('$env/static/private').npm_config_global_prefix} */
+export const npm_config_global_prefix = "/home/alex/.nvm/versions/node/v18.16.0";
 
 /** @type {import('$env/static/private').npm_command} */
 export const npm_command = "run-script";
